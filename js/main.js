@@ -1,7 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ============================================================
-  // 1. БАЗА ДАНИХ ТОВАРІВ (УНІКАЛЬНІ ФОТО ДЛЯ КОЖНОГО ТОВАРУ)
+  // 1. МОБІЛЬНЕ ГАМБУРГЕР-МЕНЮ
+  // ============================================================
+  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+  const mainNav = document.getElementById('mainNav');
+
+  if (mobileMenuToggle && mainNav) {
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenuToggle.classList.toggle('active');
+      mainNav.classList.toggle('open');
+    });
+
+    // Автоматичне закриття меню при виборі пункту
+    mainNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenuToggle.classList.remove('active');
+        mainNav.classList.remove('open');
+      });
+    });
+  }
+
+  // ============================================================
+  // 2. БАЗА ДАНИХ ТОВАРІВ (УНІКАЛЬНІ ДАНІ ДЛЯ КОЖНОГО ТОВАРУ)
   // ============================================================
   const PRODUCTS_DATA = {
     'tracksuit-terracotta': {
@@ -114,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
       photo: 'https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=900&q=80',
       colorPalette: ['#59634f', '#2a2a2a', '#b0a084']
     },
-    // ТОВАР «БОДІ»
     'body-black': {
       title: 'Боді',
       sku: '701B22',
@@ -129,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ============================================================
-  // 2. СИНХРОНІЗОВАНИЙ ТАЙМЕР НА 3 ДНІ
+  // 3. СИНХРОНІЗОВАНИЙ ТАЙМЕР НА 3 ДНІ
   // ============================================================
   const CYCLE_DURATION = 3 * 24 * 60 * 60 * 1000;
   let saleEndTime = localStorage.getItem('clothes_sale_deadline');
@@ -159,6 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pad = (n) => String(n).padStart(2, '0');
 
+    // Головна сторінка
     const d = document.getElementById('days');
     const h = document.getElementById('hours');
     const m = document.getElementById('minutes');
@@ -168,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (m) m.innerText = pad(minutes);
     if (s) s.innerText = pad(seconds);
 
+    // Сторінка товару (PDP)
     const pdpD = document.getElementById('pdpDays');
     const pdpH = document.getElementById('pdpHours');
     const pdpM = document.getElementById('pdpMinutes');
@@ -182,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSyncTimer();
 
   // ============================================================
-  // 3. СЛАЙДЕР НА ГОЛОВНІЙ
+  // 4. СЛАЙДЕР НА ГОЛОВНІЙ
   // ============================================================
   const heroSlides = document.querySelectorAll('.slide');
   const prevSlideBtn = document.getElementById('prevSlide');
@@ -205,7 +227,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 4. ПЕРЕМИКАННЯ КАТЕГОРІЙ НА ГОЛОВНІЙ
+  // 5. ПЕРЕМИКАННЯ КАТЕГОРІЙ НА ГОЛОВНІЙ
   // ============================================================
   const genderTabs = document.querySelectorAll('.switch-btn');
   const womenBox = document.getElementById('women-group');
@@ -222,7 +244,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============================================================
-  // 5. ЛОГІКА СТОРІНКИ ТОВАРУ (PRODUCT.HTML)
+  // 6. ЛОГІКА СТОРІНКИ ТОВАРУ (PRODUCT.HTML)
   // ============================================================
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id');
@@ -300,7 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 6. МОДАЛЬНІ ВІКНА КОШИКА ТА РОЗМІРУ
+  // 7. МОДАЛЬНІ ВІКНА КОШИКА ТА РОЗМІРУ
   // ============================================================
   const cartModal = document.getElementById('cartModal');
   const closeCartBtn = document.getElementById('closeCartModal');
@@ -394,8 +416,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Віджет знижки у вигляді подарунка
+  const giftWidget = document.getElementById('giftWidget');
+  const giftBubble = document.getElementById('giftBubble');
   const copyPromoBtn = document.getElementById('copyPromoBtn');
   const promoCodeEl = document.getElementById('giftPromoCode');
+
+  if (giftBubble && giftWidget) {
+    giftBubble.addEventListener('click', (e) => {
+      e.stopPropagation();
+      giftWidget.classList.toggle('active');
+    });
+  }
+
   if (copyPromoBtn && promoCodeEl) {
     copyPromoBtn.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -405,6 +438,12 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
   }
+
+  document.addEventListener('click', (e) => {
+    if (giftWidget && !giftWidget.contains(e.target)) {
+      giftWidget.classList.remove('active');
+    }
+  });
 
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeAllModals();
