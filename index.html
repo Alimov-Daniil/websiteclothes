@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Магазин Модного Одягу | Офіційний сайт</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Магазин Модного Одягу | CLOTHES.UA</title>
+  
+  <!-- Підключення шрифту Montserrat для оферу -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -31,7 +34,7 @@
       </nav>
       <div class="header-actions">
         <button class="action-btn" aria-label="Пошук">🔍</button>
-        <button class="action-btn" aria-label="Кошик">🛒 <span class="badge">0</span></button>
+        <button class="action-btn" id="openCartFromHeader" aria-label="Кошик">🛒 <span class="badge" id="cartBadge">0</span></button>
       </div>
     </div>
   </header>
@@ -39,54 +42,31 @@
   <!-- Головний слайдер (Hero Offer) -->
   <section class="hero-slider" id="hero-slider">
     <div class="slider-wrapper">
-      
-      <!-- Слайд 1: Джинси -->
       <article class="slide active">
         <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1600&q=80" alt="Джинси">
-        <div class="slide-content">
-          <h1 class="slide-title">Джинси</h1>
-        </div>
+        <div class="slide-content"><h1 class="slide-title">Джинси</h1></div>
       </article>
-
-      <!-- Слайд 2: Сукні -->
       <article class="slide">
         <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1600&q=80" alt="Сукні">
-        <div class="slide-content">
-          <h1 class="slide-title">Сукні</h1>
-        </div>
+        <div class="slide-content"><h1 class="slide-title">Сукні</h1></div>
       </article>
-
-      <!-- Слайд 3: Куртки -->
       <article class="slide">
         <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1600&q=80" alt="Куртки">
-        <div class="slide-content">
-          <h1 class="slide-title">Куртки</h1>
-        </div>
+        <div class="slide-content"><h1 class="slide-title">Куртки</h1></div>
       </article>
-
-      <!-- Слайд 4: Толстовки -->
       <article class="slide">
         <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1600&q=80" alt="Толстовки">
-        <div class="slide-content">
-          <h1 class="slide-title">Толстовки</h1>
-        </div>
+        <div class="slide-content"><h1 class="slide-title">Толстовки</h1></div>
       </article>
-
-      <!-- Слайд 5: Взуття -->
       <article class="slide">
         <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1600&q=80" alt="Взуття">
-        <div class="slide-content">
-          <h1 class="slide-title">Взуття</h1>
-        </div>
+        <div class="slide-content"><h1 class="slide-title">Взуття</h1></div>
       </article>
-
     </div>
 
-    <!-- Кнопки навігації слайдера -->
     <button class="slider-btn prev-btn" id="prevSlide" aria-label="Попередній слайд">&#10094;</button>
     <button class="slider-btn next-btn" id="nextSlide" aria-label="Наступний слайд">&#10095;</button>
 
-    <!-- Нижня плашка акції з таймером (як на фото) -->
     <div class="hero-promo-bar">
       <div class="promo-text">MID SEASON SALE -75%</div>
       <div class="promo-timer" id="saleTimer">
@@ -106,57 +86,89 @@
       <p class="section-subtitle">Свіжі релізи сезону від 1 000 до 4 000 грн</p>
     </div>
     <div class="products-grid">
-      <div class="product-card">
+
+      <div class="product-card" data-title="Костюм трикотажний жіночий, колір теракотовий, 244R9137" data-price="1 199 грн">
         <div class="product-image">
-          <span class="product-tag new">Новинка</span>
+          <span class="product-tag discount">-69%</span>
+          <span class="product-tag new-corner">New</span>
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Костюм трикотажний">
+        </div>
+        <div class="product-info-dark">
+          <div class="product-title-row">
+            Костюм трикотажний жіночий, колір теракотовий, 244R9137
+          </div>
+          <div class="product-bottom-row">
+            <div class="price-box">
+              <span class="price-current">1 199 грн</span>
+              <span class="price-old">3 839 грн</span>
+            </div>
+            <button class="buy-pill-btn">Купити</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-title="Джинси Wide-Leg Dark Grey, вільний крій" data-price="1 890 грн">
+        <div class="product-image">
+          <span class="product-tag discount">-45%</span>
+          <span class="product-tag new-corner">New</span>
+          <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Джинси Wide-Leg">
+        </div>
+        <div class="product-info-dark">
+          <div class="product-title-row">
+            Джинси Wide-Leg Dark Grey, вільний крій
+          </div>
+          <div class="product-bottom-row">
+            <div class="price-box">
+              <span class="price-current">1 890 грн</span>
+              <span class="price-old">2 650 грн</span>
+            </div>
+            <button class="buy-pill-btn">Купити</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-title="Куртка оверсайз з водовідштовхувальним покриттям" data-price="3 450 грн">
+        <div class="product-image">
+          <span class="product-tag new-corner">New</span>
           <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" alt="Куртка оверсайз">
         </div>
-        <div class="product-info">
-          <h3 class="product-title">Стьобана куртка оверсайз</h3>
-          <p class="product-price">3 450 грн</p>
-          <button class="add-to-cart-btn">Купити</button>
+        <div class="product-info-dark">
+          <div class="product-title-row">
+            Куртка оверсайз з водовідштовхувальним покриттям
+          </div>
+          <div class="product-bottom-row">
+            <div class="price-box">
+              <span class="price-current">3 450 грн</span>
+            </div>
+            <button class="buy-pill-btn">Купити</button>
+          </div>
         </div>
       </div>
 
-      <div class="product-card">
+      <div class="product-card" data-title="Худі Minimalist Cotton оверсайз" data-price="2 150 грн">
         <div class="product-image">
-          <span class="product-tag new">Новинка</span>
-          <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=80" alt="Прямі джинси Wide-Leg">
+          <span class="product-tag discount">-30%</span>
+          <span class="product-tag new-corner">New</span>
+          <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80" alt="Худі Minimalist">
         </div>
-        <div class="product-info">
-          <h3 class="product-title">Джинси Wide-Leg Grey</h3>
-          <p class="product-price">1 890 грн</p>
-          <button class="add-to-cart-btn">Купити</button>
+        <div class="product-info-dark">
+          <div class="product-title-row">
+            Худі Minimalist Cotton оверсайз
+          </div>
+          <div class="product-bottom-row">
+            <div class="price-box">
+              <span class="price-current">2 150 грн</span>
+              <span class="price-old">3 100 грн</span>
+            </div>
+            <button class="buy-pill-btn">Купити</button>
+          </div>
         </div>
       </div>
 
-      <div class="product-card">
-        <div class="product-image">
-          <span class="product-tag new">Новинка</span>
-          <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=600&q=80" alt="Толстовка преміум">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">Худі Minimalist Cotton</h3>
-          <p class="product-price">2 150 грн</p>
-          <button class="add-to-cart-btn">Купити</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <span class="product-tag new">Новинка</span>
-          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80" alt="Кросівки">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">Кросівки Street Run</h3>
-          <p class="product-price">3 800 грн</p>
-          <button class="add-to-cart-btn">Купити</button>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- РОЗДІЛЮВАЧ 1: ПАНОРАМНЕ ФОТО (як на фото 2) -->
+  <!-- РОЗДІЛЮВАЧ 1 (Панорамне фото) -->
   <div class="divider-banner">
     <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80" alt="Шопінг сезон">
   </div>
@@ -167,13 +179,12 @@
       <h2 class="section-title">Каталог колекцій</h2>
     </div>
 
-    <!-- Перемикач Жінки / Чоловіки -->
     <div class="gender-switch">
       <button class="switch-btn active" data-gender="women">Жіночий одяг</button>
       <button class="switch-btn" data-gender="men">Чоловічий одяг</button>
     </div>
 
-    <!-- Підкатегорії жіночого одягу -->
+    <!-- Жіночий розділ -->
     <div class="category-group" id="women-group">
       <div class="categories-pills">
         <button class="pill-btn active">Всі товари</button>
@@ -183,30 +194,35 @@
         <button class="pill-btn">Сукні</button>
       </div>
       <div class="products-grid">
-        <div class="product-card">
+        <div class="product-card" data-title="В'язаний светр Soft Wool, пудровий відтінок" data-price="1 650 грн">
           <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80" alt="В'язаний кардиган">
+            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80" alt="Светр Soft Wool">
           </div>
-          <div class="product-info">
-            <h3 class="product-title">В'язаний светр Soft Wool</h3>
-            <p class="product-price">1 650 грн</p>
-            <button class="add-to-cart-btn">Купити</button>
+          <div class="product-info-dark">
+            <div class="product-title-row">В'язаний светр Soft Wool, пудровий відтінок</div>
+            <div class="product-bottom-row">
+              <div class="price-box"><span class="price-current">1 650 грн</span></div>
+              <button class="buy-pill-btn">Купити</button>
+            </div>
           </div>
         </div>
-        <div class="product-card">
+
+        <div class="product-card" data-title="Джинси Mom Fit Dark, чиста бавовна" data-price="1 920 грн">
           <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Жіночі джинси Mom">
+            <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=80" alt="Джинси Mom Fit">
           </div>
-          <div class="product-info">
-            <h3 class="product-title">Джинси Mom Fit Dark</h3>
-            <p class="product-price">1 920 грн</p>
-            <button class="add-to-cart-btn">Купити</button>
+          <div class="product-info-dark">
+            <div class="product-title-row">Джинси Mom Fit Dark, чиста бавовна</div>
+            <div class="product-bottom-row">
+              <div class="price-box"><span class="price-current">1 920 грн</span></div>
+              <button class="buy-pill-btn">Купити</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Підкатегорії чоловічого одягу (за замовчуванням приховані) -->
+    <!-- Чоловічий розділ -->
     <div class="category-group" id="men-group" style="display: none;">
       <div class="categories-pills">
         <button class="pill-btn active">Всі товари</button>
@@ -216,33 +232,38 @@
         <button class="pill-btn">Футболки</button>
       </div>
       <div class="products-grid">
-        <div class="product-card">
+        <div class="product-card" data-title="Чоловічий світшот Heavy Cotton Charcoal" data-price="1 490 грн">
           <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=600&q=80" alt="Чоловічий світшот">
+            <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=600&q=80" alt="Світшот Heavy Cotton">
           </div>
-          <div class="product-info">
-            <h3 class="product-title">Чоловічий світшот Heavy</h3>
-            <p class="product-price">1 490 грн</p>
-            <button class="add-to-cart-btn">Купити</button>
+          <div class="product-info-dark">
+            <div class="product-title-row">Чоловічий світшот Heavy Cotton Charcoal</div>
+            <div class="product-bottom-row">
+              <div class="price-box"><span class="price-current">1 490 грн</span></div>
+              <button class="buy-pill-btn">Купити</button>
+            </div>
           </div>
         </div>
-        <div class="product-card">
+
+        <div class="product-card" data-title="Джинсова куртка Vintage Indigo" data-price="2 750 грн">
           <div class="product-image">
-            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Джинсова куртка">
+            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Джинсова куртка Vintage">
           </div>
-          <div class="product-info">
-            <h3 class="product-title">Джинсова куртка Vintage</h3>
-            <p class="product-price">2 750 грн</p>
-            <button class="add-to-cart-btn">Купити</button>
+          <div class="product-info-dark">
+            <div class="product-title-row">Джинсова куртка Vintage Indigo</div>
+            <div class="product-bottom-row">
+              <div class="price-box"><span class="price-current">2 750 грн</span></div>
+              <button class="buy-pill-btn">Купити</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- РОЗДІЛЮВАЧ 2: ПАНОРАМНЕ ФОТО (як на фото 2) -->
+  <!-- РОЗДІЛЮВАЧ 2 -->
   <div class="divider-banner">
-    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Колекція вуличного одягу">
+    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Колекція">
   </div>
 
   <!-- 3 БЛОК: ХІТИ ПРОДАЖУ -->
@@ -252,35 +273,41 @@
       <p class="section-subtitle">Одяг, який обирають найчастіше</p>
     </div>
     <div class="products-grid">
-      <div class="product-card">
+      <div class="product-card" data-title="Шкіряна косуха Classic Black, преміум якість" data-price="3 999 грн">
         <div class="product-image">
-          <span class="product-tag hit">Топ продажів</span>
+          <span class="product-tag discount">-20%</span>
           <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Шкіряна куртка">
         </div>
-        <div class="product-info">
-          <h3 class="product-title">Шкіряна косуха Classic</h3>
-          <p class="product-price">3 999 грн</p>
-          <button class="add-to-cart-btn">Купити</button>
+        <div class="product-info-dark">
+          <div class="product-title-row">Шкіряна косуха Classic Black, преміум якість</div>
+          <div class="product-bottom-row">
+            <div class="price-box">
+              <span class="price-current">3 999 грн</span>
+              <span class="price-old">4 999 грн</span>
+            </div>
+            <button class="buy-pill-btn">Купити</button>
+          </div>
         </div>
       </div>
 
-      <div class="product-card">
+      <div class="product-card" data-title="Штани Cargo Olive з накладними кишенями" data-price="1 850 грн">
         <div class="product-image">
-          <span class="product-tag hit">Топ продажів</span>
           <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=600&q=80" alt="Брюки карго">
         </div>
-        <div class="product-info">
-          <h3 class="product-title">Штани Cargo Olive</h3>
-          <p class="product-price">1 850 грн</p>
-          <button class="add-to-cart-btn">Купити</button>
+        <div class="product-info-dark">
+          <div class="product-title-row">Штани Cargo Olive з накладними кишенями</div>
+          <div class="product-bottom-row">
+            <div class="price-box"><span class="price-current">1 850 грн</span></div>
+            <button class="buy-pill-btn">Купити</button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- РОЗДІЛЮВАЧ 3: ПАНОРАМНЕ ФОТО (як на фото 2) -->
+  <!-- РОЗДІЛЮВАЧ 3 -->
   <div class="divider-banner">
-    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80" alt="Акційні знижки">
+    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80" alt="Акційні товари">
   </div>
 
   <!-- 4 БЛОК: ЗНИЖКИ -->
@@ -290,33 +317,20 @@
       <p class="section-subtitle">Останній шанс придбати за спеціальною ціною</p>
     </div>
     <div class="products-grid">
-      <div class="product-card">
+      <div class="product-card" data-title="Вовняне пальто Camel оверсайз крою" data-price="2 400 грн">
         <div class="product-image">
-          <span class="product-tag sale">-40%</span>
-          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Трикотажний костюм">
-        </div>
-        <div class="product-info">
-          <h3 class="product-title">Теплий костюм Beige</h3>
-          <div class="price-box">
-            <span class="product-price current">1 499 грн</span>
-            <span class="product-price old">2 500 грн</span>
-          </div>
-          <button class="add-to-cart-btn">Купити</button>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-image">
-          <span class="product-tag sale">-50%</span>
+          <span class="product-tag discount">-50%</span>
           <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=80" alt="Пальто оверсайз">
         </div>
-        <div class="product-info">
-          <h3 class="product-title">Вовняне пальто Camel</h3>
-          <div class="price-box">
-            <span class="product-price current">2 400 грн</span>
-            <span class="product-price old">4 800 грн</span>
+        <div class="product-info-dark">
+          <div class="product-title-row">Вовняне пальто Camel оверсайз крою</div>
+          <div class="product-bottom-row">
+            <div class="price-box">
+              <span class="price-current">2 400 грн</span>
+              <span class="price-old">4 800 грн</span>
+            </div>
+            <button class="buy-pill-btn">Купити</button>
           </div>
-          <button class="add-to-cart-btn">Купити</button>
         </div>
       </div>
     </div>
@@ -344,6 +358,59 @@
       </div>
     </div>
   </footer>
+
+  <!-- ==================================================== -->
+  <!-- МОДАЛЬНЕ ВІКНО «ОБЕРІТЬ РОЗМІР»                      -->
+  <!-- ==================================================== -->
+  <div class="size-modal-overlay" id="sizeModal">
+    <div class="size-modal-box">
+      <button class="size-modal-close" id="closeSizeModal" aria-label="Закрити">&times;</button>
+      <h3 class="size-modal-title">Оберіть розмір:</h3>
+      <div class="size-options-list">
+        <button class="size-pill-option" data-size="S">S</button>
+        <button class="size-pill-option" data-size="M">M</button>
+        <button class="size-pill-option" data-size="L">L</button>
+        <button class="size-pill-option" data-size="XL">XL</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================================================== -->
+  <!-- МОДАЛЬНЕ ВІКНО «КОШИК ЗАМОВЛЕНЬ»                     -->
+  <!-- ==================================================== -->
+  <div class="cart-modal-overlay" id="cartModal">
+    <div class="cart-modal-box">
+      <button class="cart-modal-close" id="closeCartModal" aria-label="Закрити">&times;</button>
+      <h2 class="cart-modal-title">Кошик замовлень</h2>
+
+      <div class="cart-item-row" id="cartItemRow">
+        <div class="cart-item-thumb">
+          <img id="cartItemImg" src="" alt="Товар">
+        </div>
+        <div class="cart-item-details">
+          <h4 class="cart-item-name" id="cartItemName">Назва товару</h4>
+          <p class="cart-item-meta" id="cartItemMeta">1 ШТ x 0 грн</p>
+          <p class="cart-item-price" id="cartItemPrice">0 грн</p>
+        </div>
+        <button class="cart-item-remove" id="removeCartItem" aria-label="Видалити">&#10005;</button>
+      </div>
+
+      <div class="cart-modal-footer">
+        <button class="btn-continue-shopping" id="continueShoppingBtn">Продовжити покупки</button>
+        <div class="cart-summary-card">
+          <div class="summary-line">
+            <span>Сума:</span>
+            <strong id="cartSubtotal">0 грн</strong>
+          </div>
+          <div class="summary-line total-line">
+            <span>Всього:</span>
+            <strong id="cartTotal">0 грн</strong>
+          </div>
+          <button class="btn-checkout">Оформлення покупки</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <script src="js/main.js"></script>
 </body>
