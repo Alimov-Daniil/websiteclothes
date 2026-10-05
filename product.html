@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Деталі товару | CLOTHES.UA</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="pdp-body">
+
+  <!-- Шапка сайту -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="index.html" class="logo">CLOTHES.UA</a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="index.html#new-arrivals">Новинки</a></li>
+          <li><a href="index.html#categories">Жінкам</a></li>
+          <li><a href="index.html#categories">Чоловікам</a></li>
+          <li><a href="index.html#hits">Хіти</a></li>
+          <li><a href="index.html#sales" class="sale-link">Розпродаж</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="action-btn" aria-label="Пошук">🔍</button>
+        <button class="action-btn" id="openCartFromHeader" aria-label="Кошик">🛒 <span class="badge" id="cartBadge">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Хлібні крихти -->
+  <nav class="breadcrumbs container">
+    <a href="index.html">Інтернет-магазин одягу</a> / 
+    <a href="index.html#categories">Каталог</a> / 
+    <span id="breadcrumbCategory">Одяг</span> / 
+    <span id="breadcrumbCurrent">Товар</span>
+  </nav>
+
+  <!-- Головний блок PDP -->
+  <main class="container pdp-main-layout">
+    
+    <!-- Ліва частина: 1 якісне головне фото товару -->
+    <div class="pdp-gallery-section">
+      <div class="pdp-single-photo-wrap">
+        <span class="pdp-discount-tag" id="pdpDiscountBadge">-50%</span>
+        <img id="pdpMainImage" src="" alt="Фото товару">
+      </div>
+    </div>
+
+    <!-- Права частина: Інформація та вибір параметрів -->
+    <div class="pdp-details-section">
+      <div class="pdp-sku-row">
+        <span>Модель: <strong id="pdpSku">241R770</strong></span>
+        <button class="pdp-wishlist-circle-btn" aria-label="Зберегти в обране">🔖</button>
+      </div>
+
+      <h1 class="pdp-title" id="pdpTitle">Назва товару</h1>
+
+      <!-- Рядок цін та відправки -->
+      <div class="pdp-pricing-row">
+        <div class="pdp-prices">
+          <span class="pdp-current-price" id="pdpPriceCurrent">0 грн</span>
+          <span class="pdp-old-price" id="pdpPriceOld">0 грн</span>
+        </div>
+        <div class="pdp-delivery-badge">Відправка: <strong>Завтра</strong></div>
+      </div>
+
+      <!-- Синхронізований таймер акції -->
+      <div class="pdp-timer-box">
+        <span class="pdp-timer-label">Акція</span>
+        <div class="pdp-timer-counter" id="pdpTimer">
+          <div><span id="pdpDays">00</span><small>днів</small></div>
+          <div><span id="pdpHours">00</span><small>годин</small></div>
+          <div><span id="pdpMinutes">00</span><small>хвилин</small></div>
+          <div><span id="pdpSeconds">00</span><small>секунд</small></div>
+        </div>
+      </div>
+
+      <!-- Вибір розміру -->
+      <div class="pdp-size-section">
+        <div class="pdp-size-header">
+          <span>Виберіть розмір:</span>
+          <span class="pdp-stock-status">В наявності: <strong id="pdpStockCount">8 шт</strong></span>
+        </div>
+        <div class="pdp-sizes-pills" id="pdpSizesPills">
+          <button class="pdp-size-btn active">S</button>
+          <button class="pdp-size-btn">M</button>
+          <button class="pdp-size-btn">L</button>
+          <button class="pdp-size-btn">XL</button>
+        </div>
+        <button class="pdp-size-chart-link">Розмірна сітка</button>
+      </div>
+
+      <!-- Кількість та кнопки покупки -->
+      <div class="pdp-actions-row">
+        <div class="pdp-qty-control">
+          <button id="pdpQtyMinus">-</button>
+          <span id="pdpQtyValue">1</span>
+          <button id="pdpQtyPlus">+</button>
+        </div>
+        <button class="pdp-main-buy-btn" id="pdpMainBuyBtn">🛍️ Купити</button>
+      </div>
+
+      <div class="pdp-quick-buy-row">
+        <div class="pdp-phone-input-wrap">
+          <span class="pdp-phone-prefix">+380</span>
+          <input type="tel" placeholder="Введіть номер..." maxlength="9">
+        </div>
+        <button class="pdp-quick-buy-btn" id="pdpQuickBuyBtn">Купити в 1 клік</button>
+      </div>
+
+      <!-- Блок «Цей товар в інших кольорах» (кружечки без кліку) -->
+      <div class="pdp-other-colors-block">
+        <div class="pdp-other-colors-title">Цей товар в інших кольорах:</div>
+        <div class="pdp-color-swatches" id="pdpColorSwatches">
+          <!-- Генеруються через JS -->
+        </div>
+      </div>
+
+      <!-- Нижні таби -->
+      <div class="pdp-tabs-row">
+        <button class="pdp-tab-btn active">Характеристики</button>
+        <button class="pdp-tab-btn">Залишити відгук</button>
+        <button class="pdp-tab-btn">Заміри виробу</button>
+      </div>
+      <div class="pdp-tab-content">
+        <p>• Матеріал: натуральна бавовна 85%, поліестер 15% (тринитка петля преміум якості).</p>
+        <p>• Особливості: оверсайз посадка, міцна фурнітура, стильна вишивка на худі та брюках.</p>
+        <p>• Виробник: Україна.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Модальне вікно кошика замовлень -->
+  <div class="cart-modal-overlay" id="cartModal">
+    <div class="cart-modal-box">
+      <button class="cart-modal-close" id="closeCartModal" aria-label="Закрити">&times;</button>
+      <h2 class="cart-modal-title">Кошик замовлень</h2>
+      <div class="cart-item-row" id="cartItemRow">
+        <div class="cart-item-thumb">
+          <img id="cartItemImg" src="" alt="Товар">
+        </div>
+        <div class="cart-item-details">
+          <h4 class="cart-item-name" id="cartItemName">Назва товару</h4>
+          <p class="cart-item-meta" id="cartItemMeta">1 ШТ x 0 грн</p>
+          <p class="cart-item-price" id="cartItemPrice">0 грн</p>
+        </div>
+        <button class="cart-item-remove" id="removeCartItem" aria-label="Видалити">&#10005;</button>
+      </div>
+      <div class="cart-modal-footer">
+        <button class="btn-continue-shopping" id="continueShoppingBtn">Продовжити покупки</button>
+        <div class="cart-summary-card">
+          <div class="summary-line">
+            <span>Сума:</span>
+            <strong id="cartSubtotal">0 грн</strong>
+          </div>
+          <div class="summary-line total-line">
+            <span>Всього:</span>
+            <strong id="cartTotal">0 грн</strong>
+          </div>
+          <button class="btn-checkout">Оформлення покупки</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
