@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
       mainNav.classList.toggle('open');
     });
 
-    // Автоматичне закриття меню при виборі пункту
     mainNav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         mobileMenuToggle.classList.remove('active');
@@ -22,7 +21,52 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 2. БАЗА ДАНИХ ТОВАРІВ (УНІКАЛЬНІ ДАНІ ДЛЯ КОЖНОГО ТОВАРУ)
+  // 2. ПЛАВНА ПРОКРУТКА З УРАХУВАННЯМ ШАПКИ ТА ПЕРЕМИКАННЯМ ВКЛАДОК
+  // ============================================================
+  const navLinks = document.querySelectorAll('.nav-list a[href^="#"]');
+
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const targetId = link.getAttribute('href');
+      if (targetId === '#' || !targetId) return;
+
+      const targetSection = document.querySelector(targetId);
+      if (targetSection) {
+        e.preventDefault();
+
+        const linkText = link.innerText.trim().toLowerCase();
+        const womenBtn = document.querySelector('.switch-btn[data-gender="women"]');
+        const menBtn = document.querySelector('.switch-btn[data-gender="men"]');
+        const womenGroup = document.getElementById('women-group');
+        const menGroup = document.getElementById('men-group');
+
+        if (linkText.includes('жінкам') && womenBtn) {
+          document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+          womenBtn.classList.add('active');
+          if (womenGroup) womenGroup.style.display = 'block';
+          if (menGroup) menGroup.style.display = 'none';
+        } else if (linkText.includes('чоловікам') && menBtn) {
+          document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
+          menBtn.classList.add('active');
+          if (womenGroup) womenGroup.style.display = 'none';
+          if (menGroup) menGroup.style.display = 'block';
+        }
+
+        const isMobile = window.innerWidth <= 768;
+        const headerOffset = isMobile ? 65 : 75;
+        const elementPosition = targetSection.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // ============================================================
+  // 3. БАЗА ДАНИХ ТОВАРІВ
   // ============================================================
   const PRODUCTS_DATA = {
     'tracksuit-terracotta': {
@@ -149,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ============================================================
-  // 3. СИНХРОНІЗОВАНИЙ ТАЙМЕР НА 3 ДНІ
+  // 4. СИНХРОНІЗОВАНИЙ ТАЙМЕР НА 3 ДНІ
   // ============================================================
   const CYCLE_DURATION = 3 * 24 * 60 * 60 * 1000;
   let saleEndTime = localStorage.getItem('clothes_sale_deadline');
@@ -179,7 +223,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pad = (n) => String(n).padStart(2, '0');
 
-    // Головна сторінка
     const d = document.getElementById('days');
     const h = document.getElementById('hours');
     const m = document.getElementById('minutes');
@@ -189,7 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (m) m.innerText = pad(minutes);
     if (s) s.innerText = pad(seconds);
 
-    // Сторінка товару (PDP)
     const pdpD = document.getElementById('pdpDays');
     const pdpH = document.getElementById('pdpHours');
     const pdpM = document.getElementById('pdpMinutes');
@@ -204,7 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSyncTimer();
 
   // ============================================================
-  // 4. СЛАЙДЕР НА ГОЛОВНІЙ
+  // 5. СЛАЙДЕР НА ГОЛОВНІЙ
   // ============================================================
   const heroSlides = document.querySelectorAll('.slide');
   const prevSlideBtn = document.getElementById('prevSlide');
@@ -227,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 5. ПЕРЕМИКАННЯ КАТЕГОРІЙ НА ГОЛОВНІЙ
+  // 6. ПЕРЕМИКАННЯ КАТЕГОРІЙ
   // ============================================================
   const genderTabs = document.querySelectorAll('.switch-btn');
   const womenBox = document.getElementById('women-group');
@@ -244,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ============================================================
-  // 6. ЛОГІКА СТОРІНКИ ТОВАРУ (PRODUCT.HTML)
+  // 7. СТОРІНКА ТОВАРУ (PRODUCT.HTML)
   // ============================================================
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id');
@@ -322,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 7. МОДАЛЬНІ ВІКНА КОШИКА ТА РОЗМІРУ
+  // 8. МОДАЛЬНІ ВІКНА КОШИКА ТА РОЗМІРУ
   // ============================================================
   const cartModal = document.getElementById('cartModal');
   const closeCartBtn = document.getElementById('closeCartModal');
@@ -416,7 +458,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Віджет знижки у вигляді подарунка
+  // Віджет подарунка
   const giftWidget = document.getElementById('giftWidget');
   const giftBubble = document.getElementById('giftBubble');
   const copyPromoBtn = document.getElementById('copyPromoBtn');
