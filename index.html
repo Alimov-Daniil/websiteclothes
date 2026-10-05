@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Магазин Модного Одягу | Офіційний сайт</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Верхній інформаційний рядок -->
+  <aside class="top-bar">
+    За промокодом <strong>SALE10</strong> знижка -10% | Безкоштовна доставка від 2000 грн
+  </aside>
+
+  <!-- Головна навігація -->
+  <header class="header">
+    <div class="container header-container">
+      <a href="#" class="logo">CLOTHES.UA</a>
+      <nav class="nav">
+        <ul class="nav-list">
+          <li><a href="#new-arrivals">Новинки</a></li>
+          <li><a href="#categories">Жінкам</a></li>
+          <li><a href="#categories">Чоловікам</a></li>
+          <li><a href="#hits">Хіти</a></li>
+          <li><a href="#sales" class="sale-link">Розпродаж</a></li>
+        </ul>
+      </nav>
+      <div class="header-actions">
+        <button class="action-btn" aria-label="Пошук">🔍</button>
+        <button class="action-btn" aria-label="Кошик">🛒 <span class="badge">0</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Головний слайдер (Hero Offer) -->
+  <section class="hero-slider" id="hero-slider">
+    <div class="slider-wrapper">
+      
+      <!-- Слайд 1: Джинси -->
+      <article class="slide active">
+        <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1600&q=80" alt="Джинси">
+        <div class="slide-content">
+          <h1 class="slide-title">Джинси</h1>
+        </div>
+      </article>
+
+      <!-- Слайд 2: Сукні -->
+      <article class="slide">
+        <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=1600&q=80" alt="Сукні">
+        <div class="slide-content">
+          <h1 class="slide-title">Сукні</h1>
+        </div>
+      </article>
+
+      <!-- Слайд 3: Куртки -->
+      <article class="slide">
+        <img src="https://images.unsplash.com/photo-1551028719-00167b16eac5?auto=format&fit=crop&w=1600&q=80" alt="Куртки">
+        <div class="slide-content">
+          <h1 class="slide-title">Куртки</h1>
+        </div>
+      </article>
+
+      <!-- Слайд 4: Толстовки -->
+      <article class="slide">
+        <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=1600&q=80" alt="Толстовки">
+        <div class="slide-content">
+          <h1 class="slide-title">Толстовки</h1>
+        </div>
+      </article>
+
+      <!-- Слайд 5: Взуття -->
+      <article class="slide">
+        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1600&q=80" alt="Взуття">
+        <div class="slide-content">
+          <h1 class="slide-title">Взуття</h1>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Кнопки навігації слайдера -->
+    <button class="slider-btn prev-btn" id="prevSlide" aria-label="Попередній слайд">&#10094;</button>
+    <button class="slider-btn next-btn" id="nextSlide" aria-label="Наступний слайд">&#10095;</button>
+
+    <!-- Нижня плашка акції з таймером (як на фото) -->
+    <div class="hero-promo-bar">
+      <div class="promo-text">MID SEASON SALE -75%</div>
+      <div class="promo-timer" id="saleTimer">
+        <div class="timer-segment"><span id="days">03</span><small>днів</small></div>
+        <div class="timer-segment"><span id="hours">12</span><small>годин</small></div>
+        <div class="timer-segment"><span id="minutes">45</span><small>хвилин</small></div>
+        <div class="timer-segment"><span id="seconds">18</span><small>секунд</small></div>
+      </div>
+      <a href="#sales" class="promo-btn">На шопінг</a>
+    </div>
+  </section>
+
+  <!-- 1 БЛОК: НОВІ НАДХОДЖЕННЯ -->
+  <section class="section container" id="new-arrivals">
+    <div class="section-header">
+      <h2 class="section-title">Нові надходження</h2>
+      <p class="section-subtitle">Свіжі релізи сезону від 1 000 до 4 000 грн</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-tag new">Новинка</span>
+          <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" alt="Куртка оверсайз">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Стьобана куртка оверсайз</h3>
+          <p class="product-price">3 450 грн</p>
+          <button class="add-to-cart-btn">Купити</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-tag new">Новинка</span>
+          <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=80" alt="Прямі джинси Wide-Leg">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Джинси Wide-Leg Grey</h3>
+          <p class="product-price">1 890 грн</p>
+          <button class="add-to-cart-btn">Купити</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-tag new">Новинка</span>
+          <img src="https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&w=600&q=80" alt="Толстовка преміум">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Худі Minimalist Cotton</h3>
+          <p class="product-price">2 150 грн</p>
+          <button class="add-to-cart-btn">Купити</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-tag new">Новинка</span>
+          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=600&q=80" alt="Кросівки">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Кросівки Street Run</h3>
+          <p class="product-price">3 800 грн</p>
+          <button class="add-to-cart-btn">Купити</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- РОЗДІЛЮВАЧ 1: ПАНОРАМНЕ ФОТО (як на фото 2) -->
+  <div class="divider-banner">
+    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80" alt="Шопінг сезон">
+  </div>
+
+  <!-- 2 БЛОК: ОДЯГ ЖІНОЧИЙ ТА ЧОЛОВІЧИЙ -->
+  <section class="section container" id="categories">
+    <div class="section-header">
+      <h2 class="section-title">Каталог колекцій</h2>
+    </div>
+
+    <!-- Перемикач Жінки / Чоловіки -->
+    <div class="gender-switch">
+      <button class="switch-btn active" data-gender="women">Жіночий одяг</button>
+      <button class="switch-btn" data-gender="men">Чоловічий одяг</button>
+    </div>
+
+    <!-- Підкатегорії жіночого одягу -->
+    <div class="category-group" id="women-group">
+      <div class="categories-pills">
+        <button class="pill-btn active">Всі товари</button>
+        <button class="pill-btn">Кофти</button>
+        <button class="pill-btn">Джинси</button>
+        <button class="pill-btn">Куртки</button>
+        <button class="pill-btn">Сукні</button>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80" alt="В'язаний кардиган">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">В'язаний светр Soft Wool</h3>
+            <p class="product-price">1 650 грн</p>
+            <button class="add-to-cart-btn">Купити</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Жіночі джинси Mom">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Джинси Mom Fit Dark</h3>
+            <p class="product-price">1 920 грн</p>
+            <button class="add-to-cart-btn">Купити</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Підкатегорії чоловічого одягу (за замовчуванням приховані) -->
+    <div class="category-group" id="men-group" style="display: none;">
+      <div class="categories-pills">
+        <button class="pill-btn active">Всі товари</button>
+        <button class="pill-btn">Кофти</button>
+        <button class="pill-btn">Джинси</button>
+        <button class="pill-btn">Куртки</button>
+        <button class="pill-btn">Футболки</button>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=600&q=80" alt="Чоловічий світшот">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Чоловічий світшот Heavy</h3>
+            <p class="product-price">1 490 грн</p>
+            <button class="add-to-cart-btn">Купити</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Джинсова куртка">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title">Джинсова куртка Vintage</h3>
+            <p class="product-price">2 750 грн</p>
+            <button class="add-to-cart-btn">Купити</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- РОЗДІЛЮВАЧ 2: ПАНОРАМНЕ ФОТО (як на фото 2) -->
+  <div class="divider-banner">
+    <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80" alt="Колекція вуличного одягу">
+  </div>
+
+  <!-- 3 БЛОК: ХІТИ ПРОДАЖУ -->
+  <section class="section container" id="hits">
+    <div class="section-header">
+      <h2 class="section-title">Хіти продажу</h2>
+      <p class="section-subtitle">Одяг, який обирають найчастіше</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-tag hit">Топ продажів</span>
+          <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Шкіряна куртка">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Шкіряна косуха Classic</h3>
+          <p class="product-price">3 999 грн</p>
+          <button class="add-to-cart-btn">Купити</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-tag hit">Топ продажів</span>
+          <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=600&q=80" alt="Брюки карго">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Штани Cargo Olive</h3>
+          <p class="product-price">1 850 грн</p>
+          <button class="add-to-cart-btn">Купити</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- РОЗДІЛЮВАЧ 3: ПАНОРАМНЕ ФОТО (як на фото 2) -->
+  <div class="divider-banner">
+    <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80" alt="Акційні знижки">
+  </div>
+
+  <!-- 4 БЛОК: ЗНИЖКИ -->
+  <section class="section container" id="sales">
+    <div class="section-header">
+      <h2 class="section-title">Сезонні знижки</h2>
+      <p class="section-subtitle">Останній шанс придбати за спеціальною ціною</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-tag sale">-40%</span>
+          <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Трикотажний костюм">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Теплий костюм Beige</h3>
+          <div class="price-box">
+            <span class="product-price current">1 499 грн</span>
+            <span class="product-price old">2 500 грн</span>
+          </div>
+          <button class="add-to-cart-btn">Купити</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-image">
+          <span class="product-tag sale">-50%</span>
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=600&q=80" alt="Пальто оверсайз">
+        </div>
+        <div class="product-info">
+          <h3 class="product-title">Вовняне пальто Camel</h3>
+          <div class="price-box">
+            <span class="product-price current">2 400 грн</span>
+            <span class="product-price old">4 800 грн</span>
+          </div>
+          <button class="add-to-cart-btn">Купити</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Підвал сайту -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div>
+        <h3>CLOTHES.UA</h3>
+        <p>Магазин стильного та якісного одягу для кожного дня.</p>
+      </div>
+      <div>
+        <h4>Клієнтам</h4>
+        <ul>
+          <li><a href="#">Доставка та оплата</a></li>
+          <li><a href="#">Повернення та обмін</a></li>
+          <li><a href="#">Таблиця розмірів</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакти</h4>
+        <p>Телефон: +38 (080) 000-00-00</p>
+        <p>Пн-Нд: 09:00 - 20:00</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
