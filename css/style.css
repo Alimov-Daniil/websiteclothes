@@ -1,3 +1,8 @@
+html {
+  scroll-behavior: smooth;
+  /* Відступ зверху, щоб липка шапка не перекривала заголовок секції */
+  scroll-padding-top: 80px;
+}
 /* Базові стилі */
 * {
   box-sizing: border-box;
