@@ -1195,3 +1195,282 @@ body.pdp-body .action-btn {
     gap: 10px;
   }
 }
+/* ==========================================================
+   МОБІЛЬНА АДАПТАЦІЯ (SMARTPHONES & TABLETS)
+   ========================================================== */
+
+/* Кнопка бургер-меню за замовчуванням прихована на ПК */
+.mobile-burger-btn {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  width: 28px;
+  height: 22px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0;
+  z-index: 101;
+}
+
+.mobile-burger-btn span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: #111;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+body.pdp-body .mobile-burger-btn span {
+  background-color: #fff;
+}
+
+/* Анімація перетворення бургера на хрестик */
+.mobile-burger-btn.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+.mobile-burger-btn.active span:nth-child(2) {
+  opacity: 0;
+}
+.mobile-burger-btn.active span:nth-child(3) {
+  transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Планшети та мобільні екрани (до 768px) */
+@media (max-width: 768px) {
+  .header-container {
+    height: 60px;
+    padding: 0 16px;
+  }
+
+  .logo {
+    font-size: 20px;
+    letter-spacing: 1.2px;
+  }
+
+  .mobile-burger-btn {
+    display: flex;
+  }
+
+  /* Виїзне мобільне меню */
+  .nav {
+    position: fixed;
+    top: 60px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background: #ffffff;
+    transition: left 0.35s ease;
+    padding: 30px 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    z-index: 99;
+  }
+
+  body.pdp-body .nav {
+    background: #151618;
+  }
+
+  .nav.open {
+    left: 0;
+  }
+
+  .nav-list {
+    flex-direction: column;
+    gap: 22px;
+    align-items: flex-start;
+  }
+
+  .nav-list a {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  /* Слайдер оферу */
+  .hero-slider {
+    height: 55vh;
+    min-height: 420px;
+  }
+
+  .slide-content {
+    right: 8%;
+    top: 40%;
+  }
+
+  .slide-title {
+    font-size: 2.6rem !important;
+  }
+
+  .slider-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 16px;
+  }
+
+  .prev-btn { left: 12px; }
+  .next-btn { right: 12px; }
+
+  .hero-promo-bar {
+    width: 94%;
+    bottom: 16px;
+    padding: 14px 16px;
+    border-radius: 18px;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .promo-text {
+    font-size: 13px;
+  }
+
+  .promo-timer {
+    gap: 12px;
+  }
+
+  .timer-segment span {
+    font-size: 16px;
+  }
+
+  .promo-btn {
+    width: 100%;
+    text-align: center;
+    padding: 8px 0;
+  }
+
+  /* Сітка каталогу товарів: 2 колонки для мобільних пристроїв */
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .product-image {
+    height: 220px;
+  }
+
+  .product-info-dark {
+    padding: 10px 12px;
+    gap: 8px;
+  }
+
+  .product-title-row {
+    font-size: 11px;
+    height: 32px;
+    line-height: 1.3;
+  }
+
+  .price-current {
+    font-size: 14px;
+  }
+
+  .price-old {
+    font-size: 11px;
+  }
+
+  .buy-pill-btn {
+    padding: 5px 12px;
+    font-size: 11px;
+  }
+
+  /* Розділювальні панорами */
+  .divider-banner {
+    height: 140px;
+  }
+
+  /* Сторінка товару (PDP) */
+  .pdp-main-layout {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding-bottom: 50px;
+  }
+
+  .pdp-single-photo-wrap {
+    height: 420px;
+  }
+
+  .pdp-title {
+    font-size: 18px;
+    margin-bottom: 14px;
+  }
+
+  .pdp-current-price {
+    font-size: 22px;
+  }
+
+  .pdp-timer-box {
+    padding: 10px 14px;
+  }
+
+  .pdp-actions-row {
+    flex-direction: row;
+  }
+
+  .pdp-quick-buy-row {
+    flex-direction: column;
+  }
+
+  .pdp-quick-buy-btn {
+    width: 100%;
+  }
+
+  /* Модальне вікно кошика */
+  .cart-modal-box {
+    padding: 24px 20px 20px;
+    border-radius: 16px;
+    max-width: 95%;
+  }
+
+  .cart-modal-title {
+    font-size: 20px;
+    margin-bottom: 18px;
+  }
+
+  .cart-item-thumb {
+    width: 65px;
+    height: 80px;
+  }
+
+  .cart-item-name {
+    font-size: 13px;
+  }
+
+  .cart-modal-footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .cart-summary-card {
+    width: 100%;
+  }
+
+  /* Плаваючий віджет подарунка */
+  .gift-floating-widget {
+    bottom: 18px;
+    right: 18px;
+  }
+
+  .gift-icon-bubble {
+    width: 50px;
+    height: 50px;
+  }
+
+  .gift-emoji {
+    font-size: 24px;
+  }
+
+  .gift-popup-card {
+    width: 250px;
+    bottom: 64px;
+    right: 0;
+  }
+}
+
+/* Дуже маленькі екрани (до 380px) */
+@media (max-width: 380px) {
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+  .product-image {
+    height: 320px;
+  }
+}
