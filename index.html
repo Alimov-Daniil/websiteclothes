@@ -16,8 +16,15 @@
   <!-- Головна навігація -->
   <header class="header">
     <div class="container header-container">
+      <button class="mobile-burger-btn" id="mobileMenuToggle" aria-label="Відкрити меню">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
       <a href="index.html" class="logo">CLOTHES.UA</a>
-      <nav class="nav">
+
+      <nav class="nav" id="mainNav">
         <ul class="nav-list">
           <li><a href="#new-arrivals">Новинки</a></li>
           <li><a href="#categories">Жінкам</a></li>
@@ -26,12 +33,16 @@
           <li><a href="#sales" class="sale-link">Розпродаж</a></li>
         </ul>
       </nav>
+
       <div class="header-actions">
         <button class="action-btn" aria-label="Пошук">🔍</button>
-        <button class="action-btn" id="openCartFromHeader" aria-label="Кошик">🛒 <span class="badge" id="cartBadge">0</span></button>
+        <button class="action-btn" id="openCartFromHeader" aria-label="Кошик">
+          🛒 <span class="badge" id="cartBadge">0</span>
+        </button>
       </div>
     </div>
   </header>
+
 
   <!-- Слайдер Hero Offer -->
   <section class="hero-slider" id="hero-slider">
