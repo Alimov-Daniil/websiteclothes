@@ -1,8 +1,3 @@
-html {
-  scroll-behavior: smooth;
-  /* Відступ зверху, щоб липка шапка не перекривала заголовок секції */
-  scroll-padding-top: 80px;
-}
 /* Базові стилі */
 * {
   box-sizing: border-box;
@@ -1477,5 +1472,161 @@ body.pdp-body .mobile-burger-btn span {
   }
   .product-image {
     height: 320px;
+  }
+}
+/* Стильний блок "Товар у дорозі" */
+.empty-category-msg {
+  text-align: center;
+  padding: 55px 20px;
+  background: #18191c;
+  border-radius: 16px;
+  border: 1px dashed #3a3d44;
+  margin: 20px auto;
+  max-width: 520px;
+  color: #efefef;
+}
+
+.empty-category-msg .empty-icon {
+  font-size: 46px;
+  display: block;
+  margin-bottom: 14px;
+}
+
+.empty-category-msg h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #fff;
+}
+
+.empty-category-msg p {
+  font-size: 14px;
+  color: #999;
+}
+/* ===============================
+   ПОВНОЕКРАННА КАРУСЕЛЬ КАТАЛОГУ 
+   ===============================*/
+#categories {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  overflow: hidden;
+}
+
+#categories .section-header,
+#categories .gender-switch,
+#categories .categories-pills {
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
+.carousel-wrapper {
+  position: relative;
+  width: 100vw;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.products-carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 15px 30px 30px 30px;
+  scrollbar-width: none; /* Приховуємо смугу прокрутки */
+  -webkit-overflow-scrolling: touch;
+  justify-content: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.products-carousel::-webkit-scrollbar {
+  display: none; /* Приховуємо смугу для Chrome/Safari */
+}
+
+/* Коли всього 1 товар або їх мало — центруємо */
+.products-carousel.centered {
+  justify-content: center !important;
+}
+
+/* Адаптивна ширина карток: 5-6 карток вміщуються рівно на весь екран */
+.products-carousel .product-card {
+  flex: 0 0 calc((100vw - 120px) / 5.2);
+  min-width: 240px;
+  max-width: 320px;
+  margin: 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.products-carousel .product-card .product-image {
+  height: 380px;
+}
+
+/* Стрілки розташовані прямо поверх фотографій на краях екрана */
+.carousel-nav-btn {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(18, 19, 22, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 25;
+  transition: all 0.25s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.carousel-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: #111;
+  border-color: #fff;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-nav-btn.prev {
+  left: 20px;
+}
+
+.carousel-nav-btn.next {
+  right: 20px;
+}
+
+.carousel-nav-btn.hidden {
+  display: none !important;
+}
+
+/* На мобільних картки компактніші */
+@media (max-width: 1100px) {
+  .products-carousel .product-card {
+    flex: 0 0 calc((100vw - 80px) / 3.2);
+    min-width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .products-carousel {
+    padding: 10px 16px 20px 16px;
+    gap: 12px;
+  }
+  .products-carousel .product-card {
+    flex: 0 0 210px;
+    min-width: 210px;
+  }
+  .products-carousel .product-card .product-image {
+    height: 300px;
+  }
+  .carousel-nav-btn {
+    display: none !important;
   }
 }
