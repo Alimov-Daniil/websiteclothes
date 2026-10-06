@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ============================================================
-  // 1. МОБІЛЬНЕ ГАМБУРГЕР-МЕНЮ
+  // 1. МОБІЛЬНЕ ГАМБУРГЕР-МЕНЮ (ПРАЦЮЄ НА INDEX ТА PRODUCT)
   // ============================================================
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
   const mainNav = document.getElementById('mainNav');
@@ -21,52 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 2. ПЛАВНА ПРОКРУТКА З УРАХУВАННЯМ ШАПКИ ТА ПЕРЕМИКАННЯМ ВКЛАДОК
-  // ============================================================
-  const navLinks = document.querySelectorAll('.nav-list a[href^="#"]');
-
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const targetId = link.getAttribute('href');
-      if (targetId === '#' || !targetId) return;
-
-      const targetSection = document.querySelector(targetId);
-      if (targetSection) {
-        e.preventDefault();
-
-        const linkText = link.innerText.trim().toLowerCase();
-        const womenBtn = document.querySelector('.switch-btn[data-gender="women"]');
-        const menBtn = document.querySelector('.switch-btn[data-gender="men"]');
-        const womenGroup = document.getElementById('women-group');
-        const menGroup = document.getElementById('men-group');
-
-        if (linkText.includes('жінкам') && womenBtn) {
-          document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
-          womenBtn.classList.add('active');
-          if (womenGroup) womenGroup.style.display = 'block';
-          if (menGroup) menGroup.style.display = 'none';
-        } else if (linkText.includes('чоловікам') && menBtn) {
-          document.querySelectorAll('.switch-btn').forEach(b => b.classList.remove('active'));
-          menBtn.classList.add('active');
-          if (womenGroup) womenGroup.style.display = 'none';
-          if (menGroup) menGroup.style.display = 'block';
-        }
-
-        const isMobile = window.innerWidth <= 768;
-        const headerOffset = isMobile ? 65 : 75;
-        const elementPosition = targetSection.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-
-  // ============================================================
-  // 3. БАЗА ДАНИХ ТОВАРІВ
+  // 2. БАЗА ДАНИХ ТОВАРІВ (УНІКАЛЬНІ ДАНІ ДЛЯ КОЖНОГО ТОВАРУ)
   // ============================================================
   const PRODUCTS_DATA = {
     'tracksuit-terracotta': {
@@ -193,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ============================================================
-  // 4. СИНХРОНІЗОВАНИЙ ТАЙМЕР НА 3 ДНІ
+  // 3. СИНХРОНІЗОВАНИЙ ТАЙМЕР НА 3 ДНІ
   // ============================================================
   const CYCLE_DURATION = 3 * 24 * 60 * 60 * 1000;
   let saleEndTime = localStorage.getItem('clothes_sale_deadline');
@@ -246,7 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateSyncTimer();
 
   // ============================================================
-  // 5. СЛАЙДЕР НА ГОЛОВНІЙ
+  // 4. СЛАЙДЕР НА ГОЛОВНІЙ
   // ============================================================
   const heroSlides = document.querySelectorAll('.slide');
   const prevSlideBtn = document.getElementById('prevSlide');
@@ -269,24 +224,198 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 6. ПЕРЕМИКАННЯ КАТЕГОРІЙ
+  // 5. ФУНКЦІЯ ПЕРЕМИКАННЯ СТАТІ ТА МАРШРУТИЗАЦІЯ
   // ============================================================
-  const genderTabs = document.querySelectorAll('.switch-btn');
-  const womenBox = document.getElementById('women-group');
-  const menBox = document.getElementById('men-group');
+  function switchGender(gender) {
+    const womenBtn = document.querySelector('.switch-btn[data-gender="women"]');
+    const menBtn = document.querySelector('.switch-btn[data-gender="men"]');
+    const womenGroup = document.getElementById('women-group');
+    const menGroup = document.getElementById('men-group');
 
+    if (!womenBtn || !menBtn) return;
+
+    if (gender === 'women') {
+      womenBtn.classList.add('active');
+      menBtn.classList.remove('active');
+      if (womenGroup) womenGroup.style.display = 'block';
+      if (menGroup) menGroup.style.display = 'none';
+
+      const firstPill = womenGroup?.querySelector('.pill-btn[data-filter="all"]');
+      if (firstPill) firstPill.click();
+    } else if (gender === 'men') {
+      menBtn.classList.add('active');
+      womenBtn.classList.remove('active');
+      if (menGroup) menGroup.style.display = 'block';
+      if (womenGroup) womenGroup.style.display = 'none';
+
+      const firstPill = menGroup?.querySelector('.pill-btn[data-filter="all"]');
+      if (firstPill) firstPill.click();
+    }
+  }
+
+  // Перемикання статі кнопками безпосередньо в каталозі
+  const genderTabs = document.querySelectorAll('.switch-btn');
   genderTabs.forEach((btn) => {
     btn.addEventListener('click', () => {
-      genderTabs.forEach((b) => b.classList.remove('active'));
-      btn.classList.add('active');
       const isWomen = btn.getAttribute('data-gender') === 'women';
-      if (womenBox) womenBox.style.display = isWomen ? 'block' : 'none';
-      if (menBox) menBox.style.display = isWomen ? 'none' : 'block';
+      switchGender(isWomen ? 'women' : 'men');
+    });
+  });
+
+  // Обробка параметра URL ?gender=women або ?gender=men при переході з інших сторінок
+  const currentParams = new URLSearchParams(window.location.search);
+  const targetGender = currentParams.get('gender');
+  if (targetGender) {
+    switchGender(targetGender);
+
+    if (window.location.hash === '#categories') {
+      setTimeout(() => {
+        const catSection = document.getElementById('categories');
+        if (catSection) {
+          const isMobile = window.innerWidth <= 768;
+          const headerOffset = isMobile ? 65 : 75;
+          const targetY = catSection.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+          window.scrollTo({ top: targetY, behavior: 'smooth' });
+        }
+      }, 150);
+    }
+  }
+
+  // Обробка переходів у шапці на поточній сторінці
+  const navLinks = document.querySelectorAll('.nav-list a');
+  navLinks.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+
+      if (href && href.startsWith('#')) {
+        const targetSection = document.querySelector(href);
+        if (targetSection) {
+          e.preventDefault();
+
+          const genderTarget = link.getAttribute('data-gender-target');
+          if (genderTarget) {
+            switchGender(genderTarget);
+          }
+
+          const isMobile = window.innerWidth <= 768;
+          const headerOffset = isMobile ? 65 : 75;
+          const elementPosition = targetSection.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }
     });
   });
 
   // ============================================================
-  // 7. СТОРІНКА ТОВАРУ (PRODUCT.HTML)
+  // 6. ГОРИЗОНТАЛЬНИЙ СКРОЛ ТА ФІЛЬТРАЦІЯ КАТАЛОГУ
+  // ============================================================
+  function initCarouselScroll(prevBtnId, nextBtnId, carouselId) {
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    const carousel = document.getElementById(carouselId);
+
+    if (prevBtn && nextBtn && carousel) {
+      prevBtn.addEventListener('click', () => {
+        const scrollStep = carousel.clientWidth * 0.75;
+        carousel.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', () => {
+        const scrollStep = carousel.clientWidth * 0.75;
+        carousel.scrollBy({ left: scrollStep, behavior: 'smooth' });
+      });
+    }
+  }
+
+  initCarouselScroll('womenPrev', 'womenNext', 'women-grid');
+  initCarouselScroll('menPrev', 'menNext', 'men-grid');
+
+  function initCategoryFilters(groupId, carouselId, emptyId, prevBtnId, nextBtnId) {
+    const group = document.getElementById(groupId);
+    if (!group) return;
+
+    const filterBtns = group.querySelectorAll('.pill-btn');
+    const carousel = document.getElementById(carouselId);
+    const carouselWrapper = carousel ? carousel.closest('.carousel-wrapper') : null;
+    const emptyMsg = document.getElementById(emptyId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+
+    function updateCarouselLayout(visibleCount) {
+      if (!carousel) return;
+
+      const singleCard = carousel.querySelector('.product-card');
+      const cardWidth = singleCard ? singleCard.offsetWidth : 280;
+      const totalWidth = visibleCount * (cardWidth + 16);
+      const screenWidth = window.innerWidth;
+
+      if (visibleCount <= 1 || totalWidth <= screenWidth) {
+        carousel.classList.add('centered');
+        if (prevBtn) prevBtn.classList.add('hidden');
+        if (nextBtn) nextBtn.classList.add('hidden');
+      } else {
+        carousel.classList.remove('centered');
+        if (prevBtn) prevBtn.classList.remove('hidden');
+        if (nextBtn) nextBtn.classList.remove('hidden');
+      }
+    }
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const filterValue = btn.getAttribute('data-filter');
+        const cards = carousel.querySelectorAll('.product-card');
+        let visibleCount = 0;
+
+        cards.forEach((card) => {
+          const cardCat = card.getAttribute('data-category');
+          if (filterValue === 'all' || cardCat === filterValue) {
+            card.style.display = 'flex';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+
+        if (visibleCount === 0) {
+          if (emptyMsg) emptyMsg.style.display = 'block';
+          if (carouselWrapper) carouselWrapper.style.display = 'none';
+        } else {
+          if (emptyMsg) emptyMsg.style.display = 'none';
+          if (carouselWrapper) carouselWrapper.style.display = 'block';
+          updateCarouselLayout(visibleCount);
+        }
+      });
+    });
+
+    window.addEventListener('resize', () => {
+      const activeBtn = group.querySelector('.pill-btn.active');
+      const filterValue = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
+      let count = 0;
+      carousel.querySelectorAll('.product-card').forEach((c) => {
+        const cat = c.getAttribute('data-category');
+        if (filterValue === 'all' || cat === filterValue) count++;
+      });
+      updateCarouselLayout(count);
+    });
+
+    const initialVisible = carousel.querySelectorAll('.product-card').length;
+    updateCarouselLayout(initialVisible);
+  }
+
+  initCategoryFilters('women-group', 'women-grid', 'women-empty', 'womenPrev', 'womenNext');
+  initCategoryFilters('men-group', 'men-grid', 'men-empty', 'menPrev', 'menNext');
+
+  // ============================================================
+  // 7. ЛОГІКА СТОРІНКИ ТОВАРУ (PRODUCT.HTML)
   // ============================================================
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id');
@@ -458,7 +587,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Віджет подарунка
+  // Віджет знижки у вигляді подарунка
   const giftWidget = document.getElementById('giftWidget');
   const giftBubble = document.getElementById('giftBubble');
   const copyPromoBtn = document.getElementById('copyPromoBtn');
