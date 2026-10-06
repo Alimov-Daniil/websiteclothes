@@ -141,23 +141,22 @@
     </div>
   </main>
 
-  <!-- Модальне вікно кошика замовлень -->
+  <!-- Модальне вікно кошика для product.html -->
   <div class="cart-modal-overlay" id="cartModal">
     <div class="cart-modal-box">
       <button class="cart-modal-close" id="closeCartModal" aria-label="Закрити">&times;</button>
       <h2 class="cart-modal-title">Кошик замовлень</h2>
-      <div class="cart-item-row" id="cartItemRow">
-        <div class="cart-item-thumb">
-          <img id="cartItemImg" src="" alt="Товар">
-        </div>
-        <div class="cart-item-details">
-          <h4 class="cart-item-name" id="cartItemName">Назва товару</h4>
-          <p class="cart-item-meta" id="cartItemMeta">1 ШТ x 0 грн</p>
-          <p class="cart-item-price" id="cartItemPrice">0 грн</p>
-        </div>
-        <button class="cart-item-remove" id="removeCartItem" aria-label="Видалити">&#10005;</button>
+      
+      <!-- Контейнер для доданих товарів -->
+      <div class="cart-items-container" id="cartItemsContainer"></div>
+
+      <!-- Блок, якщо кошик порожній -->
+      <div class="cart-empty-state" id="cartEmptyState" style="display: none;">
+        <span style="font-size: 40px; display: block; margin-bottom: 10px;">🛒</span>
+        <p>Ваш кошик порожній</p>
       </div>
-      <div class="cart-modal-footer">
+
+      <div class="cart-modal-footer" id="cartFooter">
         <button class="btn-continue-shopping" id="continueShoppingBtn">Продовжити покупки</button>
         <div class="cart-summary-card">
           <div class="summary-line">
