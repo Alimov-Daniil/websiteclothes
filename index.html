@@ -8,9 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css?v=2.0">
   
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=3.0">
 </head>
 <body>
 
@@ -73,7 +72,7 @@
     <button class="slider-btn next-btn" id="nextSlide" aria-label="Наступний слайд">&#10095;</button>
 
     <div class="hero-promo-bar">
-      <div class="promo-text">MID SEASON SALE -50%</div>
+      <div class="promo-text">MID SEASON SALE -75%</div>
       <div class="promo-timer" id="saleTimer">
         <div class="timer-segment"><span id="days">00</span><small>днів</small></div>
         <div class="timer-segment"><span id="hours">00</span><small>годин</small></div>
@@ -548,7 +547,7 @@
     <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=80" alt="Акційні знижки">
   </div>
 
-  <!-- Блок 4: Знижки (ЗАМІНЕНО НА БОДІ) -->
+  <!-- Блок 4: Знижки -->
   <section class="section container" id="sales">
     <div class="section-header">
       <h2 class="section-title">Сезонні знижки</h2>
@@ -632,23 +631,22 @@
     </div>
   </div>
 
-  <!-- Модальне вікно кошика -->
+  <!-- Модальне вікно кошика (оновлена розмітка з порожнім станом) -->
   <div class="cart-modal-overlay" id="cartModal">
     <div class="cart-modal-box">
       <button class="cart-modal-close" id="closeCartModal" aria-label="Закрити">&times;</button>
       <h2 class="cart-modal-title">Кошик замовлень</h2>
-      <div class="cart-item-row" id="cartItemRow">
-        <div class="cart-item-thumb">
-          <img id="cartItemImg" src="" alt="Товар">
-        </div>
-        <div class="cart-item-details">
-          <h4 class="cart-item-name" id="cartItemName">Назва товару</h4>
-          <p class="cart-item-meta" id="cartItemMeta">1 ШТ x 0 грн</p>
-          <p class="cart-item-price" id="cartItemPrice">0 грн</p>
-        </div>
-        <button class="cart-item-remove" id="removeCartItem" aria-label="Видалити">&#10005;</button>
+      
+      <!-- Контейнер для списку доданих товарів -->
+      <div class="cart-items-container" id="cartItemsContainer"></div>
+
+      <!-- Блок, якщо кошик порожній -->
+      <div class="cart-empty-state" id="cartEmptyState" style="display: none;">
+        <span style="font-size: 40px; display: block; margin-bottom: 10px;">🛒</span>
+        <p>Ваш кошик порожній</p>
       </div>
-      <div class="cart-modal-footer">
+
+      <div class="cart-modal-footer" id="cartFooter">
         <button class="btn-continue-shopping" id="continueShoppingBtn">Продовжити покупки</button>
         <div class="cart-summary-card">
           <div class="summary-line">
