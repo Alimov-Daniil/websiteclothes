@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 5. ФУНКЦІЯ ПЕРЕМИКАННЯ СТАТІ ТА МАРШРУТИЗАЦІЯ
+  // 5. ПЕРЕМИКАННЯ СТАТІ ТА МАРШРУТИЗАЦІЯ
   // ============================================================
   function switchGender(gender) {
     const womenBtn = document.querySelector('.switch-btn[data-gender="women"]');
@@ -253,7 +253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Перемикання статі кнопками безпосередньо в каталозі
   const genderTabs = document.querySelectorAll('.switch-btn');
   genderTabs.forEach((btn) => {
     btn.addEventListener('click', () => {
@@ -262,7 +261,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Обробка параметра URL ?gender=women або ?gender=men при переході з інших сторінок
   const currentParams = new URLSearchParams(window.location.search);
   const targetGender = currentParams.get('gender');
   if (targetGender) {
@@ -281,7 +279,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Обробка переходів у шапці на поточній сторінці
   const navLinks = document.querySelectorAll('.nav-list a');
   navLinks.forEach((link) => {
     link.addEventListener('click', (e) => {
@@ -348,7 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCarouselLayout(visibleCount) {
       if (!carousel) return;
 
-      const singleCard = carousel.querySelector('.product-card');
+      const singleCard = carousel.querySelector('.product-card:not(.hidden-card)');
       const cardWidth = singleCard ? singleCard.offsetWidth : 280;
       const totalWidth = visibleCount * (cardWidth + 16);
       const screenWidth = window.innerWidth;
@@ -376,10 +373,10 @@ document.addEventListener('DOMContentLoaded', () => {
         cards.forEach((card) => {
           const cardCat = card.getAttribute('data-category');
           if (filterValue === 'all' || cardCat === filterValue) {
-            card.style.display = 'flex';
+            card.classList.remove('hidden-card');
             visibleCount++;
           } else {
-            card.style.display = 'none';
+            card.classList.add('hidden-card');
           }
         });
 
@@ -587,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Віджет знижки у вигляді подарунка
+  // Віджет знижки
   const giftWidget = document.getElementById('giftWidget');
   const giftBubble = document.getElementById('giftBubble');
   const copyPromoBtn = document.getElementById('copyPromoBtn');
