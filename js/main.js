@@ -483,14 +483,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const pdpBuyBtn = document.getElementById('pdpMainBuyBtn');
     if (pdpBuyBtn) {
       pdpBuyBtn.addEventListener('click', () => {
-        const activeSize = document.querySelector('.pdp-size-btn.active')?.innerText || 'S';
-        openCartModal(item.title, item.currentPrice, item.photo, activeSize, quantity);
+        const activeSize = document.querySelector('.pdp-size-btn.active')?.innerText.trim() || 'S';
+        addToCart(item.title, item.currentPrice, item.photo, activeSize, quantity);
       });
     }
   }
 
   // ============================================================
-  // 8. МОДАЛЬНІ ВІКНА КОШИКА ТА РОЗМІРУ
+  // 8. ПОВНОЦІННИЙ КОШИК З ПІДСУМОВУВАННЯМ ТА ВИДАЛЕННЯМ
   // ============================================================
   const cartModal = document.getElementById('cartModal');
   const closeCartBtn = document.getElementById('closeCartModal');
@@ -500,27 +500,84 @@ document.addEventListener('DOMContentLoaded', () => {
   const sizeModal = document.getElementById('sizeModal');
   const closeSizeBtn = document.getElementById('closeSizeModal');
 
-  let totalCartItems = 0;
+  const cartContainer = document.getElementById('cartItemsContainer');
+  const cartEmptyState = document.getElementById('cartEmptyState');
+  const cartFooter = document.getElementById('cartFooter');
+  const cartSubtotalEl = document.getElementById('cartSubtotal');
+  const cartTotalEl = document.getElementById('cartTotal');
+
+  let cart = JSON.parse(localStorage.getItem('user_cart') || '[]');
   let tempSelectedProduct = {};
 
-  function openCartModal(title, price, img, size = 'S', qty = 1) {
-    const cartImg = document.getElementById('cartItemImg');
-    const cartName = document.getElementById('cartItemName');
-    const cartMeta = document.getElementById('cartItemMeta');
-    const cartPrice = document.getElementById('cartItemPrice');
-    const cartSubtotal = document.getElementById('cartSubtotal');
-    const cartTotal = document.getElementById('cartTotal');
+  function parsePrice(priceStr) {
+    if (typeof priceStr === 'number') return priceStr;
+    return parseInt(String(priceStr).replace(/\D/g, ''), 10) || 0;
+  }
 
-    if (cartImg) cartImg.src = img;
-    if (cartName) cartName.innerText = `${title} (Розмір: ${size})`;
-    if (cartMeta) cartMeta.innerText = `${qty} ШТ x ${price}`;
-    if (cartPrice) cartPrice.innerText = price;
-    if (cartSubtotal) cartSubtotal.innerText = price;
-    if (cartTotal) cartTotal.innerText = price;
+  function renderCart() {
+    if (!cartContainer) return;
 
-    totalCartItems += qty;
-    if (cartBadge) cartBadge.innerText = totalCartItems;
+    cartContainer.innerHTML = '';
+    let totalSum = 0;
+    let totalCount = 0;
 
+    if (cart.length === 0) {
+      if (cartEmptyState) cartEmptyState.style.display = 'block';
+      if (cartFooter) cartFooter.style.display = 'none';
+    } else {
+      if (cartEmptyState) cartEmptyState.style.display = 'none';
+      if (cartFooter) cartFooter.style.display = 'flex';
+
+      cart.forEach((item, index) => {
+        const itemSum = item.price * item.quantity;
+        totalSum += itemSum;
+        totalCount += item.quantity;
+
+        const row = document.createElement('div');
+        row.className = 'cart-item-row';
+        row.innerHTML = `
+          <div class="cart-item-thumb">
+            <img src="${item.img}" alt="${item.title}">
+          </div>
+          <div class="cart-item-details">
+            <h4 class="cart-item-name">${item.title} (Розмір: ${item.size})</h4>
+            <p class="cart-item-meta">${item.quantity} ШТ x ${item.price.toLocaleString('uk-UA')} грн</p>
+            <p class="cart-item-price">${itemSum.toLocaleString('uk-UA')} грн</p>
+          </div>
+          <button class="cart-item-remove" data-index="${index}" aria-label="Видалити">&#10005;</button>
+        `;
+        cartContainer.appendChild(row);
+      });
+    }
+
+    if (cartSubtotalEl) cartSubtotalEl.innerText = `${totalSum.toLocaleString('uk-UA')} грн`;
+    if (cartTotalEl) cartTotalEl.innerText = `${totalSum.toLocaleString('uk-UA')} грн`;
+    if (cartBadge) cartBadge.innerText = totalCount;
+
+    localStorage.setItem('user_cart', JSON.stringify(cart));
+  }
+
+  function addToCart(title, priceStr, img, size = 'S', qty = 1) {
+    const numericPrice = parsePrice(priceStr);
+    const existingIndex = cart.findIndex(i => i.title === title && i.size === size);
+
+    if (existingIndex > -1) {
+      cart[existingIndex].quantity += qty;
+    } else {
+      cart.push({
+        title,
+        price: numericPrice,
+        img,
+        size,
+        quantity: qty
+      });
+    }
+
+    renderCart();
+    openCartModal();
+  }
+
+  function openCartModal() {
     if (cartModal) {
       cartModal.classList.add('open');
       document.body.style.overflow = 'hidden';
@@ -533,16 +590,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.style.overflow = '';
   }
 
+  if (cartContainer) {
+    cartContainer.addEventListener('click', (e) => {
+      const removeBtn = e.target.closest('.cart-item-remove');
+      if (removeBtn) {
+        const itemIndex = parseInt(removeBtn.getAttribute('data-index'), 10);
+        cart.splice(itemIndex, 1);
+        renderCart();
+      }
+    });
+  }
+
   if (closeCartBtn) closeCartBtn.addEventListener('click', closeAllModals);
   if (continueBtn) continueBtn.addEventListener('click', closeAllModals);
   if (closeSizeBtn) closeSizeBtn.addEventListener('click', closeAllModals);
 
   if (headerCartBtn) {
     headerCartBtn.addEventListener('click', () => {
-      if (cartModal) {
-        cartModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
+      renderCart();
+      openCartModal();
     });
   }
 
@@ -580,7 +646,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pill.addEventListener('click', () => {
       const chosenSize = pill.getAttribute('data-size');
       if (sizeModal) sizeModal.classList.remove('open');
-      openCartModal(tempSelectedProduct.title, tempSelectedProduct.price, tempSelectedProduct.img, chosenSize);
+      addToCart(tempSelectedProduct.title, tempSelectedProduct.price, tempSelectedProduct.img, chosenSize, 1);
     });
   });
 
@@ -616,5 +682,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeAllModals();
   });
+
+  // Ініціалізуємо кошик під час завантаження сторінки
+  renderCart();
 
 });
