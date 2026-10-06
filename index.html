@@ -13,8 +13,7 @@
 </head>
 <body>
 
-  <!-- Головна навігація -->
- <!-- Головна навігація з підтримкою мобільного меню -->
+  <!-- Головна навігація з підтримкою мобільного меню -->
   <header class="header">
     <div class="container header-container">
       <button class="mobile-burger-btn" id="mobileMenuToggle" aria-label="Відкрити меню">
@@ -28,8 +27,8 @@
       <nav class="nav" id="mainNav">
         <ul class="nav-list">
           <li><a href="#new-arrivals">Новинки</a></li>
-          <li><a href="#categories">Жінкам</a></li>
-          <li><a href="#categories">Чоловікам</a></li>
+          <li><a href="#categories" data-gender-target="women">Жінкам</a></li>
+          <li><a href="#categories" data-gender-target="men">Чоловікам</a></li>
           <li><a href="#hits">Хіти</a></li>
           <li><a href="#sales" class="sale-link">Розпродаж</a></li>
         </ul>
@@ -43,6 +42,7 @@
       </div>
     </div>
   </header>
+
   <!-- Слайдер Hero Offer -->
   <section class="hero-slider" id="hero-slider">
     <div class="slider-wrapper">
@@ -184,10 +184,11 @@
     <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1600&q=80" alt="Шопінг сезон">
   </div>
 
-  <!-- Блок 2: Жіночий та Чоловічий одяг -->
+  <!-- Блок 2: Каталог усіх колекцій з горизонтальним скролом та категоріями -->
   <section class="section container" id="categories">
     <div class="section-header">
       <h2 class="section-title">Каталог колекцій</h2>
+      <p class="section-subtitle">Обирайте категорію або гортайте всю колекцію вліво та вправо</p>
     </div>
 
     <div class="gender-switch">
@@ -195,93 +196,296 @@
       <button class="switch-btn" data-gender="men">Чоловічий одяг</button>
     </div>
 
+    <!-- ==================== ЖІНОЧИЙ РОЗДІЛ ==================== -->
     <div class="category-group" id="women-group">
       <div class="categories-pills">
-        <button class="pill-btn active">Всі товари</button>
-        <button class="pill-btn">Кофти</button>
-        <button class="pill-btn">Джинси</button>
-        <button class="pill-btn">Куртки</button>
-        <button class="pill-btn">Сукні</button>
+        <button class="pill-btn active" data-filter="all">Всі товари</button>
+        <button class="pill-btn" data-filter="sweaters">Кофти</button>
+        <button class="pill-btn" data-filter="suits">Костюми</button>
+        <button class="pill-btn" data-filter="jeans">Джинси</button>
+        <button class="pill-btn" data-filter="jackets">Куртки</button>
+        <button class="pill-btn" data-filter="dresses">Сукні та Боді</button>
       </div>
-      <div class="products-grid">
-        <div class="product-card" data-id="sweater-soft-wool">
-          <a href="product.html?id=sweater-soft-wool" class="product-card-link">
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80" alt="Светр">
-            </div>
-          </a>
-          <div class="product-info-dark">
-            <a href="product.html?id=sweater-soft-wool" class="product-title-row">
-              В'язаний светр Soft Wool, пудровий відтінок, 881W320
+
+      <!-- Обертка каруселі зі стрілками навігації -->
+      <div class="carousel-wrapper">
+        <button class="carousel-nav-btn prev" id="womenPrev" aria-label="Гортати вліво">&#10094;</button>
+
+        <div class="products-carousel" id="women-grid">
+          
+          <!-- Светр Soft Wool (Кофти) -->
+          <div class="product-card" data-id="sweater-soft-wool" data-category="sweaters">
+            <a href="product.html?id=sweater-soft-wool" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=600&q=80" alt="Светр">
+              </div>
             </a>
-            <div class="product-bottom-row">
-              <div class="price-box"><span class="price-current">1 650 грн</span></div>
-              <button class="buy-pill-btn" data-id="sweater-soft-wool">Купити</button>
+            <div class="product-info-dark">
+              <a href="product.html?id=sweater-soft-wool" class="product-title-row">
+                В'язаний светр Soft Wool, пудровий відтінок, 881W320
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box"><span class="price-current">1 650 грн</span></div>
+                <button class="buy-pill-btn" data-id="sweater-soft-wool">Купити</button>
+              </div>
             </div>
           </div>
+
+          <!-- Костюм трикотажний (Костюми) -->
+          <div class="product-card" data-id="tracksuit-terracotta" data-category="suits">
+            <a href="product.html?id=tracksuit-terracotta" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=600&q=80" alt="Костюм">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=tracksuit-terracotta" class="product-title-row">
+                Костюм трикотажний жіночий, колір теракотовий, 244R9137
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box">
+                  <span class="price-current">1 199 грн</span>
+                  <span class="price-old">3 839 грн</span>
+                </div>
+                <button class="buy-pill-btn" data-id="tracksuit-terracotta">Купити</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Джинси Mom Fit (Джинси) -->
+          <div class="product-card" data-id="jeans-mom-fit" data-category="jeans">
+            <a href="product.html?id=jeans-mom-fit" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=80" alt="Джинси">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=jeans-mom-fit" class="product-title-row">
+                Джинси Mom Fit Dark, бавовна, 104R4400
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box"><span class="price-current">1 920 грн</span></div>
+                <button class="buy-pill-btn" data-id="jeans-mom-fit">Купити</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Джинси Wide-Leg (Джинси) -->
+          <div class="product-card" data-id="jeans-wide-leg" data-category="jeans">
+            <a href="product.html?id=jeans-wide-leg" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=600&q=80" alt="Джинси">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=jeans-wide-leg" class="product-title-row">
+                Джинси Wide-Leg Dark Grey, вільний крій, 102R5501
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box">
+                  <span class="price-current">1 890 грн</span>
+                  <span class="price-old">2 650 грн</span>
+                </div>
+                <button class="buy-pill-btn" data-id="jeans-wide-leg">Купити</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Куртка оверсайз (Куртки) -->
+          <div class="product-card" data-id="jacket-oversize" data-category="jackets">
+            <a href="product.html?id=jacket-oversize" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?auto=format&fit=crop&w=600&q=80" alt="Куртка">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=jacket-oversize" class="product-title-row">
+                Куртка оверсайз з водовідштовхувальним покриттям, 305J210
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box"><span class="price-current">3 450 грн</span></div>
+                <button class="buy-pill-btn" data-id="jacket-oversize">Купити</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Шкіряна косуха (Куртки) -->
+          <div class="product-card" data-id="leather-jacket-classic" data-category="jackets">
+            <a href="product.html?id=leather-jacket-classic" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Косуха">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=leather-jacket-classic" class="product-title-row">
+                Шкіряна косуха Classic Black, 909L710
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box">
+                  <span class="price-current">3 999 грн</span>
+                  <span class="price-old">4 999 грн</span>
+                </div>
+                <button class="buy-pill-btn" data-id="leather-jacket-classic">Купити</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Боді (Сукні та Боді) -->
+          <div class="product-card" data-id="body-black" data-category="dresses">
+            <a href="product.html?id=body-black" class="product-card-link">
+              <div class="product-image">
+                <img src="img/top.jpg" alt="Боді">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=body-black" class="product-title-row">
+                Боді з вирізом на блискавці Black Classic, 701B22
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box">
+                  <span class="price-current">899 грн</span>
+                  <span class="price-old">1 799 грн</span>
+                </div>
+                <button class="buy-pill-btn" data-id="body-black">Купити</button>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <div class="product-card" data-id="jeans-mom-fit">
-          <a href="product.html?id=jeans-mom-fit" class="product-card-link">
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?auto=format&fit=crop&w=600&q=80" alt="Джинси">
-            </div>
-          </a>
-          <div class="product-info-dark">
-            <a href="product.html?id=jeans-mom-fit" class="product-title-row">
-              Джинси Mom Fit Dark, бавовна, 104R4400
-            </a>
-            <div class="product-bottom-row">
-              <div class="price-box"><span class="price-current">1 920 грн</span></div>
-              <button class="buy-pill-btn" data-id="jeans-mom-fit">Купити</button>
-            </div>
-          </div>
-        </div>
+        <button class="carousel-nav-btn next" id="womenNext" aria-label="Гортати вправо">&#10095;</button>
+      </div>
+
+      <!-- Повідомлення "Товар у дорозі" для жінок -->
+      <div class="empty-category-msg" id="women-empty" style="display: none;">
+        <span class="empty-icon">🚚</span>
+        <h3>Товар у дорозі</h3>
+        <p>Очікуємо нове надходження речей цієї категорії найближчим часом!</p>
       </div>
     </div>
 
+    <!-- ==================== ЧОЛОВІЧИЙ РОЗДІЛ ==================== -->
     <div class="category-group" id="men-group" style="display: none;">
       <div class="categories-pills">
-        <button class="pill-btn active">Всі товари</button>
-        <button class="pill-btn">Кофти</button>
-        <button class="pill-btn">Джинси</button>
-        <button class="pill-btn">Куртки</button>
-        <button class="pill-btn">Футболки</button>
+        <button class="pill-btn active" data-filter="all">Всі товари</button>
+        <button class="pill-btn" data-filter="sweaters">Кофти</button>
+        <button class="pill-btn" data-filter="suits">Костюми</button>
+        <button class="pill-btn" data-filter="jeans">Джинси та Штани</button>
+        <button class="pill-btn" data-filter="jackets">Куртки</button>
+        <button class="pill-btn" data-filter="tshirts">Футболки</button>
       </div>
-      <div class="products-grid">
-        <div class="product-card" data-id="sweatshirt-heavy">
-          <a href="product.html?id=sweatshirt-heavy" class="product-card-link">
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=600&q=80" alt="Світшот">
-            </div>
-          </a>
-          <div class="product-info-dark">
-            <a href="product.html?id=sweatshirt-heavy" class="product-title-row">
-              Чоловічий світшот Heavy Cotton Charcoal, 773M110
+
+      <div class="carousel-wrapper">
+        <button class="carousel-nav-btn prev" id="menPrev" aria-label="Гортати вліво">&#10094;</button>
+
+        <div class="products-carousel" id="men-grid">
+          
+          <!-- Світшот -->
+          <div class="product-card" data-id="sweatshirt-heavy" data-category="sweaters">
+            <a href="product.html?id=sweatshirt-heavy" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=600&q=80" alt="Світшот">
+              </div>
             </a>
-            <div class="product-bottom-row">
-              <div class="price-box"><span class="price-current">1 490 грн</span></div>
-              <button class="buy-pill-btn" data-id="sweatshirt-heavy">Купити</button>
+            <div class="product-info-dark">
+              <a href="product.html?id=sweatshirt-heavy" class="product-title-row">
+                Чоловічий світшот Heavy Cotton Charcoal, 773M110
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box"><span class="price-current">1 490 грн</span></div>
+                <button class="buy-pill-btn" data-id="sweatshirt-heavy">Купити</button>
+              </div>
             </div>
           </div>
+
+          <!-- Худі оверсайз -->
+          <div class="product-card" data-id="hoodie-minimalist" data-category="sweaters">
+            <a href="product.html?id=hoodie-minimalist" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?auto=format&fit=crop&w=600&q=80" alt="Худі">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=hoodie-minimalist" class="product-title-row">
+                Худі Minimalist Cotton оверсайз, 552H1200
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box">
+                  <span class="price-current">2 150 грн</span>
+                  <span class="price-old">3 100 грн</span>
+                </div>
+                <button class="buy-pill-btn" data-id="hoodie-minimalist">Купити</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Джинсова куртка Vintage -->
+          <div class="product-card" data-id="denim-jacket-vintage" data-category="jackets">
+            <a href="product.html?id=denim-jacket-vintage" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Куртка">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=denim-jacket-vintage" class="product-title-row">
+                Джинсова куртка Vintage Indigo, 442D991
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box"><span class="price-current">2 750 грн</span></div>
+                <button class="buy-pill-btn" data-id="denim-jacket-vintage">Купити</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Штани карго -->
+          <div class="product-card" data-id="cargo-pants-olive" data-category="jeans">
+            <a href="product.html?id=cargo-pants-olive" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&w=600&q=80" alt="Штани карго">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=cargo-pants-olive" class="product-title-row">
+                Штани Cargo Olive з накладними кишенями, 663C210
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box"><span class="price-current">1 850 грн</span></div>
+                <button class="buy-pill-btn" data-id="cargo-pants-olive">Купити</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Шкіряна косуха -->
+          <div class="product-card" data-id="leather-jacket-classic" data-category="jackets">
+            <a href="product.html?id=leather-jacket-classic" class="product-card-link">
+              <div class="product-image">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=600&q=80" alt="Косуха">
+              </div>
+            </a>
+            <div class="product-info-dark">
+              <a href="product.html?id=leather-jacket-classic" class="product-title-row">
+                Шкіряна косуха Classic Black, 909L710
+              </a>
+              <div class="product-bottom-row">
+                <div class="price-box">
+                  <span class="price-current">3 999 грн</span>
+                  <span class="price-old">4 999 грн</span>
+                </div>
+                <button class="buy-pill-btn" data-id="leather-jacket-classic">Купити</button>
+              </div>
+            </div>
+          </div>
+
         </div>
 
-        <div class="product-card" data-id="denim-jacket-vintage">
-          <a href="product.html?id=denim-jacket-vintage" class="product-card-link">
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&w=600&q=80" alt="Куртка">
-            </div>
-          </a>
-          <div class="product-info-dark">
-            <a href="product.html?id=denim-jacket-vintage" class="product-title-row">
-              Джинсова куртка Vintage Indigo, 442D991
-            </a>
-            <div class="product-bottom-row">
-              <div class="price-box"><span class="price-current">2 750 грн</span></div>
-              <button class="buy-pill-btn" data-id="denim-jacket-vintage">Купити</button>
-            </div>
-          </div>
-        </div>
+        <button class="carousel-nav-btn next" id="menNext" aria-label="Гортати вправо">&#10095;</button>
+      </div>
+
+      <!-- Повідомлення "Товар у дорозі" для чоловіків -->
+      <div class="empty-category-msg" id="men-empty" style="display: none;">
+        <span class="empty-icon">🚚</span>
+        <h3>Товар у дорозі</h3>
+        <p>Очікуємо нове надходження речей цієї категорії найближчим часом!</p>
       </div>
     </div>
   </section>
