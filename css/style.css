@@ -507,7 +507,7 @@ body.pdp-body .mobile-burger-btn span {
 }
 
 /* ==========================================================
-   ПОВНОЕКРАННА КАРУСЕЛЬ КАТАЛОГУ (БЕЗ ПОРОЖНІХ ЗОН)
+   ПОВНОЕКРАННА КАРУСЕЛЬ КАТАЛОГУ
    ========================================================== */
 #categories {
   max-width: 100% !important;
@@ -647,6 +647,39 @@ body.pdp-body .mobile-burger-btn span {
 .empty-category-msg p {
   font-size: 14px;
   color: #999;
+}
+
+/* ==========================================================
+   КОШИК (ДИНАМІЧНИЙ СПИСОК ТА ПОРОЖНІЙ СТАН)
+   ========================================================== */
+.cart-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 340px;
+  overflow-y: auto;
+  padding-right: 6px;
+  margin-bottom: 20px;
+}
+
+.cart-items-container::-webkit-scrollbar {
+  width: 5px;
+}
+
+.cart-items-container::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+.cart-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+}
+
+.cart-empty-state p {
+  font-size: 16px;
+  color: #ccc;
 }
 
 /* ==========================================================
@@ -944,7 +977,6 @@ body.pdp-body .mobile-burger-btn span {
   cursor: pointer;
 }
 
-/* Колірні кружечки */
 .pdp-other-colors-block {
   border-top: 1px solid #2b2c31;
   padding-top: 18px;
@@ -1227,13 +1259,14 @@ body.pdp-body .mobile-burger-btn span {
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding-bottom: 25px;
+  padding-bottom: 20px;
   position: relative;
+  border-bottom: 1px solid #28292d;
 }
 
 .cart-item-thumb {
-  width: 80px;
-  height: 96px;
+  width: 75px;
+  height: 90px;
   border-radius: 4px;
   overflow: hidden;
   background: #25262a;
@@ -1256,13 +1289,13 @@ body.pdp-body .mobile-burger-btn span {
   font-weight: 500;
   line-height: 1.4;
   color: #efefef;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .cart-item-meta {
   font-size: 13px;
   color: #999;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .cart-item-price {
@@ -1275,16 +1308,23 @@ body.pdp-body .mobile-burger-btn span {
   position: absolute;
   top: 10px;
   right: 0;
-  width: 34px;
-  height: 34px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  border: 1px solid #2e3036;
+  border: 1px solid #3c3e44;
   background: transparent;
-  color: #666;
+  color: #888;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.2s;
+}
+
+.cart-item-remove:hover {
+  background: #e53935;
+  color: #fff;
+  border-color: #e53935;
 }
 
 .cart-modal-footer {
