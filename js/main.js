@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ============================================================
-  // 1. МОБІЛЬНЕ ГАМБУРГЕР-МЕНЮ (ПРАЦЮЄ НА INDEX ТА PRODUCT)
+  // 1. МОБІЛЬНЕ МЕНЮ (БУРГЕР)
   // ============================================================
   const mobileMenuToggle = document.getElementById('mobileMenuToggle');
   const mainNav = document.getElementById('mainNav');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ============================================================
-  // 2. БАЗА ДАНИХ ТОВАРІВ (УНІКАЛЬНІ ДАНІ ДЛЯ КОЖНОГО ТОВАРУ)
+  // 2. БАЗА ДАНИХ ТОВАРІВ
   // ============================================================
   const PRODUCTS_DATA = {
     'tracksuit-terracotta': {
@@ -135,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
       colorPalette: ['#59634f', '#2a2a2a', '#b0a084']
     },
     'body-black': {
-      title: 'Боді',
+      title: 'Боді з вирізом на блискавці Black Classic',
       sku: '701B22',
       category: 'Сезонні знижки',
       currentPrice: '899 грн',
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   // ============================================================
-  // 3. СИНХРОНІЗОВАНИЙ ТАЙМЕР НА 3 ДНІ
+  // 3. СИНХРОНІЗОВАНИЙ ТАЙМЕР
   // ============================================================
   const CYCLE_DURATION = 3 * 24 * 60 * 60 * 1000;
   let saleEndTime = localStorage.getItem('clothes_sale_deadline');
@@ -178,23 +178,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const pad = (n) => String(n).padStart(2, '0');
 
-    const d = document.getElementById('days');
-    const h = document.getElementById('hours');
-    const m = document.getElementById('minutes');
-    const s = document.getElementById('seconds');
-    if (d) d.innerText = pad(days);
-    if (h) h.innerText = pad(hours);
-    if (m) m.innerText = pad(minutes);
-    if (s) s.innerText = pad(seconds);
-
-    const pdpD = document.getElementById('pdpDays');
-    const pdpH = document.getElementById('pdpHours');
-    const pdpM = document.getElementById('pdpMinutes');
-    const pdpS = document.getElementById('pdpSeconds');
-    if (pdpD) pdpD.innerText = pad(days);
-    if (pdpH) pdpH.innerText = pad(hours);
-    if (pdpM) pdpM.innerText = pad(minutes);
-    if (pdpS) pdpS.innerText = pad(seconds);
+    ['days', 'pdpDays'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = pad(days); });
+    ['hours', 'pdpHours'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = pad(hours); });
+    ['minutes', 'pdpMinutes'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = pad(minutes); });
+    ['seconds', 'pdpSeconds'].forEach(id => { const el = document.getElementById(id); if (el) el.innerText = pad(seconds); });
   }
 
   setInterval(updateSyncTimer, 1000);
@@ -239,7 +226,6 @@ document.addEventListener('DOMContentLoaded', () => {
       menBtn.classList.remove('active');
       if (womenGroup) womenGroup.style.display = 'block';
       if (menGroup) menGroup.style.display = 'none';
-
       const firstPill = womenGroup?.querySelector('.pill-btn[data-filter="all"]');
       if (firstPill) firstPill.click();
     } else if (gender === 'men') {
@@ -247,17 +233,18 @@ document.addEventListener('DOMContentLoaded', () => {
       womenBtn.classList.remove('active');
       if (menGroup) menGroup.style.display = 'block';
       if (womenGroup) womenGroup.style.display = 'none';
-
       const firstPill = menGroup?.querySelector('.pill-btn[data-filter="all"]');
       if (firstPill) firstPill.click();
     }
+
+    if (typeof filterAndSortCatalog === 'function') {
+      filterAndSortCatalog();
+    }
   }
 
-  const genderTabs = document.querySelectorAll('.switch-btn');
-  genderTabs.forEach((btn) => {
+  document.querySelectorAll('.switch-btn').forEach((btn) => {
     btn.addEventListener('click', () => {
-      const isWomen = btn.getAttribute('data-gender') === 'women';
-      switchGender(isWomen ? 'women' : 'men');
+      switchGender(btn.getAttribute('data-gender'));
     });
   });
 
@@ -265,51 +252,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const targetGender = currentParams.get('gender');
   if (targetGender) {
     switchGender(targetGender);
-
-    if (window.location.hash === '#categories') {
-      setTimeout(() => {
-        const catSection = document.getElementById('categories');
-        if (catSection) {
-          const isMobile = window.innerWidth <= 768;
-          const headerOffset = isMobile ? 65 : 75;
-          const targetY = catSection.getBoundingClientRect().top + window.pageYOffset - headerOffset;
-          window.scrollTo({ top: targetY, behavior: 'smooth' });
-        }
-      }, 150);
-    }
   }
 
-  const navLinks = document.querySelectorAll('.nav-list a');
-  navLinks.forEach((link) => {
-    link.addEventListener('click', (e) => {
-      const href = link.getAttribute('href');
-
-      if (href && href.startsWith('#')) {
-        const targetSection = document.querySelector(href);
-        if (targetSection) {
-          e.preventDefault();
-
-          const genderTarget = link.getAttribute('data-gender-target');
-          if (genderTarget) {
-            switchGender(genderTarget);
-          }
-
-          const isMobile = window.innerWidth <= 768;
-          const headerOffset = isMobile ? 65 : 75;
-          const elementPosition = targetSection.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }
-    });
-  });
-
   // ============================================================
-  // 6. ГОРИЗОНТАЛЬНИЙ СКРОЛ ТА ФІЛЬТРАЦІЯ КАТАЛОГУ
+  // 6. КАРУСЕЛЬ КАТАЛОГУ
   // ============================================================
   function initCarouselScroll(prevBtnId, nextBtnId, carouselId) {
     const prevBtn = document.getElementById(prevBtnId);
@@ -318,12 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (prevBtn && nextBtn && carousel) {
       prevBtn.addEventListener('click', () => {
-        const scrollStep = carousel.clientWidth * 0.75;
-        carousel.scrollBy({ left: -scrollStep, behavior: 'smooth' });
+        carousel.scrollBy({ left: -carousel.clientWidth * 0.75, behavior: 'smooth' });
       });
       nextBtn.addEventListener('click', () => {
-        const scrollStep = carousel.clientWidth * 0.75;
-        carousel.scrollBy({ left: scrollStep, behavior: 'smooth' });
+        carousel.scrollBy({ left: carousel.clientWidth * 0.75, behavior: 'smooth' });
       });
     }
   }
@@ -344,7 +288,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateCarouselLayout(visibleCount) {
       if (!carousel) return;
-
       const singleCard = carousel.querySelector('.product-card:not(.hidden-card)');
       const cardWidth = singleCard ? singleCard.offsetWidth : 280;
       const totalWidth = visibleCount * (cardWidth + 16);
@@ -393,17 +336,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    window.addEventListener('resize', () => {
-      const activeBtn = group.querySelector('.pill-btn.active');
-      const filterValue = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
-      let count = 0;
-      carousel.querySelectorAll('.product-card').forEach((c) => {
-        const cat = c.getAttribute('data-category');
-        if (filterValue === 'all' || cat === filterValue) count++;
-      });
-      updateCarouselLayout(count);
-    });
-
     const initialVisible = carousel.querySelectorAll('.product-card').length;
     updateCarouselLayout(initialVisible);
   }
@@ -412,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCategoryFilters('men-group', 'men-grid', 'men-empty', 'menPrev', 'menNext');
 
   // ============================================================
-  // 7. ЛОГІКА СТОРІНКИ ТОВАРУ (PRODUCT.HTML)
+  // 7. СТОРІНКА ТОВАРУ (PRODUCT.HTML)
   // ============================================================
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id');
@@ -439,10 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pdpPriceOld) pdpPriceOld.innerText = item.oldPrice;
     if (pdpDiscountBadge) pdpDiscountBadge.innerText = item.discount;
     if (pdpStock) pdpStock.innerText = item.stock;
-
-    if (pdpMainImage) {
-      pdpMainImage.src = item.photo;
-    }
+    if (pdpMainImage) pdpMainImage.src = item.photo;
 
     if (colorSwatchesBox && item.colorPalette) {
       colorSwatchesBox.innerHTML = '';
@@ -487,10 +416,25 @@ document.addEventListener('DOMContentLoaded', () => {
         addToCart(item.title, item.currentPrice, item.photo, activeSize, quantity);
       });
     }
+
+    const quickBuyBtn = document.getElementById('pdpQuickBuyBtn');
+    const quickPhoneInput = document.getElementById('quickBuyPhone');
+    if (quickBuyBtn && quickPhoneInput) {
+      quickBuyBtn.addEventListener('click', () => {
+        const phone = quickPhoneInput.value.trim();
+        if (phone.length < 9) {
+          alert('Введіть коректний 9-значний номер телефону');
+          return;
+        }
+        const activeSize = document.querySelector('.pdp-size-btn.active')?.innerText.trim() || 'S';
+        alert(`Дякуємо! Замовлення на "${item.title}" (Розмір ${activeSize}) оформлено.\nНомер: +380${phone}. Менеджер зв'яжеться з вами.`);
+        quickPhoneInput.value = '';
+      });
+    }
   }
 
   // ============================================================
-  // 8. ПОВНОЦІННИЙ КОШИК З ПІДСУМОВУВАННЯМ ТА ВИДАЛЕННЯМ
+  // 8. КОШИК ТА LOCALSTORAGE
   // ============================================================
   const cartModal = document.getElementById('cartModal');
   const closeCartBtn = document.getElementById('closeCartModal');
@@ -541,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
           </div>
           <div class="cart-item-details">
             <h4 class="cart-item-name">${item.title} (Розмір: ${item.size})</h4>
-            <p class="cart-item-meta">${item.quantity} ШТ x ${item.price.toLocaleString('uk-UA')} грн</p>
+            <p class="cart-item-meta">${item.quantity} шт. × ${item.price.toLocaleString('uk-UA')} грн</p>
             <p class="cart-item-price">${itemSum.toLocaleString('uk-UA')} грн</p>
           </div>
           <button class="cart-item-remove" data-index="${index}" aria-label="Видалити">&#10005;</button>
@@ -574,20 +518,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     renderCart();
-    openCartModal();
+    openModal(cartModal);
   }
 
-  function openCartModal() {
-    if (cartModal) {
-      cartModal.classList.add('open');
+  function openModal(modal) {
+    if (modal) {
+      modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
   }
 
+  function closeModal(modal) {
+    if (modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
   function closeAllModals() {
-    if (cartModal) cartModal.classList.remove('open');
-    if (sizeModal) sizeModal.classList.remove('open');
-    document.body.style.overflow = '';
+    document.querySelectorAll('.modal-overlay.open, .cart-modal-overlay.open, .size-modal-overlay.open').forEach(m => closeModal(m));
   }
 
   if (cartContainer) {
@@ -601,16 +550,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  if (closeCartBtn) closeCartBtn.addEventListener('click', closeAllModals);
-  if (continueBtn) continueBtn.addEventListener('click', closeAllModals);
-  if (closeSizeBtn) closeSizeBtn.addEventListener('click', closeAllModals);
-
-  if (headerCartBtn) {
-    headerCartBtn.addEventListener('click', () => {
-      renderCart();
-      openCartModal();
-    });
-  }
+  if (closeCartBtn) closeCartBtn.addEventListener('click', () => closeModal(cartModal));
+  if (continueBtn) continueBtn.addEventListener('click', () => closeModal(cartModal));
+  if (closeSizeBtn) closeSizeBtn.addEventListener('click', () => closeModal(sizeModal));
+  if (headerCartBtn) headerCartBtn.addEventListener('click', () => { renderCart(); openModal(cartModal); });
 
   const buyPillButtons = document.querySelectorAll('.buy-pill-btn');
   buyPillButtons.forEach(btn => {
@@ -620,11 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const pId = btn.getAttribute('data-id');
       const item = PRODUCTS_DATA[pId];
       if (item) {
-        tempSelectedProduct = {
-          title: item.title,
-          price: item.currentPrice,
-          img: item.photo
-        };
+        tempSelectedProduct = { title: item.title, price: item.currentPrice, img: item.photo };
       } else {
         const card = btn.closest('.product-card');
         tempSelectedProduct = {
@@ -634,10 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
       }
 
-      if (sizeModal) {
-        sizeModal.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      }
+      if (sizeModal) openModal(sizeModal);
     });
   });
 
@@ -645,10 +581,274 @@ document.addEventListener('DOMContentLoaded', () => {
   sizePills.forEach(pill => {
     pill.addEventListener('click', () => {
       const chosenSize = pill.getAttribute('data-size');
-      if (sizeModal) sizeModal.classList.remove('open');
+      closeModal(sizeModal);
       addToCart(tempSelectedProduct.title, tempSelectedProduct.price, tempSelectedProduct.img, chosenSize, 1);
     });
   });
+
+  // ============================================================
+  // 9. CHECKOUT ТА ОПЛАТА
+  // ============================================================
+  const checkoutBtn = document.querySelector('.btn-checkout');
+  const checkoutModal = document.getElementById('checkoutModal');
+  const closeCheckoutModal = document.getElementById('closeCheckoutModal');
+  const checkoutForm = document.getElementById('checkoutForm');
+  const checkoutFinalTotal = document.getElementById('checkoutFinalTotal');
+
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const currentCart = JSON.parse(localStorage.getItem('user_cart') || '[]');
+      const totalPrice = currentCart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+      if (totalPrice === 0) {
+        alert('Ваш кошик порожній! Оберіть товари для замовлення.');
+        return;
+      }
+
+      closeModal(cartModal);
+      if (checkoutFinalTotal) checkoutFinalTotal.innerText = `${totalPrice.toLocaleString('uk-UA')} грн`;
+      openModal(checkoutModal);
+    });
+  }
+
+  if (closeCheckoutModal) {
+    closeCheckoutModal.addEventListener('click', () => closeModal(checkoutModal));
+  }
+
+  if (checkoutForm) {
+    checkoutForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('orderName').value;
+      const phone = document.getElementById('orderPhone').value;
+      const total = checkoutFinalTotal.innerText;
+      const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+      const paymentText = paymentMethod === 'card' ? 'Оплата картою онлайн' : 'Післяплата у відділенні';
+
+      alert(`Дякуємо за замовлення, ${name}!\nСума до сплати: ${total}\nСпосіб оплати: ${paymentText}\nМенеджер зв'яжеться з вами за номером: ${phone}`);
+      
+      cart = [];
+      renderCart();
+      checkoutForm.reset();
+      closeModal(checkoutModal);
+    });
+  }
+
+  // ============================================================
+  // 10. ТАБЛИЦЯ РОЗМІРІВ ТА ІНФО-МОДАЛКИ
+  // ============================================================
+  const sizeGuideModal = document.getElementById('sizeGuideModal');
+  const closeSizeGuideModal = document.getElementById('closeSizeGuideModal');
+
+  document.querySelectorAll('.size-guide-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(sizeGuideModal);
+    });
+  });
+
+  if (closeSizeGuideModal) {
+    closeSizeGuideModal.addEventListener('click', () => closeModal(sizeGuideModal));
+  }
+
+  const infoDeliveryModal = document.getElementById('infoDeliveryModal');
+  const closeDeliveryModal = document.getElementById('closeDeliveryModal');
+
+  document.querySelectorAll('.footer-delivery-link, a[href="#delivery"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(infoDeliveryModal);
+    });
+  });
+
+  if (closeDeliveryModal) {
+    closeDeliveryModal.addEventListener('click', () => closeModal(infoDeliveryModal));
+  }
+
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal(overlay);
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAllModals();
+  });
+
+  // ============================================================
+  // 11. ФІЛЬТРАЦІЯ ТА СОРТУВАННЯ У КАТАЛОЗІ КОЛЕКЦІЙ
+  // ============================================================
+  const filterCat = document.getElementById('filterCategory');
+  const priceMinInput = document.getElementById('priceMin');
+  const priceMaxInput = document.getElementById('priceMax');
+  const sortPriceSelect = document.getElementById('sortPrice');
+  const resetBtn = document.getElementById('resetFilterBtn');
+
+  function filterAndSortCatalog() {
+    const minVal = parseFloat(priceMinInput?.value) || 0;
+    const maxVal = parseFloat(priceMaxInput?.value) || Infinity;
+    const selectedCategory = filterCat?.value || 'all';
+
+    const activeGroup = document.querySelector('.category-group:not([style*="display: none"])');
+    if (!activeGroup) return;
+
+    const activeCarousel = activeGroup.querySelector('.products-carousel');
+    const emptyMsg = activeGroup.querySelector('.empty-category-msg');
+    const carouselWrapper = activeGroup.querySelector('.carousel-wrapper');
+    const cards = activeCarousel?.querySelectorAll('.product-card');
+
+    if (!cards) return;
+
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const priceText = card.querySelector('.price-current')?.innerText || '0';
+      const price = parseFloat(priceText.replace(/\D/g, '')) || 0;
+      const category = card.dataset.category || 'all';
+
+      const matchPrice = price >= minVal && price <= maxVal;
+      const matchCat = (selectedCategory === 'all' || category === selectedCategory);
+
+      if (matchPrice && matchCat) {
+        card.classList.remove('hidden-card');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden-card');
+      }
+    });
+
+    const sortVal = sortPriceSelect?.value;
+    if (activeCarousel && (sortVal === 'asc' || sortVal === 'desc')) {
+      const cardsArray = Array.from(cards);
+      cardsArray.sort((a, b) => {
+        const priceA = parseFloat(a.querySelector('.price-current')?.innerText.replace(/\D/g, '')) || 0;
+        const priceB = parseFloat(b.querySelector('.price-current')?.innerText.replace(/\D/g, '')) || 0;
+        return sortVal === 'asc' ? priceA - priceB : priceB - priceA;
+      });
+      cardsArray.forEach(card => activeCarousel.appendChild(card));
+    }
+
+    if (visibleCount === 0) {
+      if (emptyMsg) emptyMsg.style.display = 'block';
+      if (carouselWrapper) carouselWrapper.style.display = 'none';
+    } else {
+      if (emptyMsg) emptyMsg.style.display = 'none';
+      if (carouselWrapper) carouselWrapper.style.display = 'block';
+      if (visibleCount <= 2) {
+        activeCarousel.classList.add('centered');
+      } else {
+        activeCarousel.classList.remove('centered');
+      }
+    }
+  }
+
+  if (filterCat) filterCat.addEventListener('change', filterAndSortCatalog);
+  if (priceMinInput) priceMinInput.addEventListener('input', filterAndSortCatalog);
+  if (priceMaxInput) priceMaxInput.addEventListener('input', filterAndSortCatalog);
+  if (sortPriceSelect) sortPriceSelect.addEventListener('change', filterAndSortCatalog);
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      if (filterCat) filterCat.value = 'all';
+      if (priceMinInput) priceMinInput.value = '';
+      if (priceMaxInput) priceMaxInput.value = '';
+      if (sortPriceSelect) sortPriceSelect.value = 'default';
+      
+      document.querySelectorAll('.categories-pills .pill-btn').forEach(b => {
+        if (b.dataset.filter === 'all') b.classList.add('active');
+        else b.classList.remove('active');
+      });
+
+      filterAndSortCatalog();
+    });
+  }
+  // ============================================================
+  // 12. ПОШУК ТОВАРІВ ПО САЙТУ
+  // ============================================================
+  const openSearchBtn = document.getElementById('openSearchBtn');
+  const searchModal = document.getElementById('searchModal');
+  const closeSearchModal = document.getElementById('closeSearchModal');
+  const siteSearchInput = document.getElementById('siteSearchInput');
+  const clearSearchBtn = document.getElementById('clearSearchBtn');
+  const searchResultsContainer = document.getElementById('searchResultsContainer');
+
+  function openSearch() {
+    if (searchModal) {
+      searchModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => {
+        siteSearchInput?.focus();
+      }, 100);
+    }
+  }
+
+  function closeSearch() {
+    if (searchModal) {
+      searchModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (openSearchBtn) openSearchBtn.addEventListener('click', openSearch);
+  if (closeSearchModal) closeSearchModal.addEventListener('click', closeSearch);
+
+  // Очищення інпута
+  if (clearSearchBtn && siteSearchInput) {
+    clearSearchBtn.addEventListener('click', () => {
+      siteSearchInput.value = '';
+      clearSearchBtn.style.display = 'none';
+      if (searchResultsContainer) {
+        searchResultsContainer.innerHTML = '<div class="search-hint">Почніть вводити назву, артикул або категорію одягу...</div>';
+      }
+      siteSearchInput.focus();
+    });
+  }
+
+  // Обробка введення пошукового запиту
+  if (siteSearchInput && searchResultsContainer) {
+    siteSearchInput.addEventListener('input', () => {
+      const query = siteSearchInput.value.trim().toLowerCase();
+
+      if (query.length > 0) {
+        if (clearSearchBtn) clearSearchBtn.style.display = 'block';
+      } else {
+        if (clearSearchBtn) clearSearchBtn.style.display = 'none';
+        searchResultsContainer.innerHTML = '<div class="search-hint">Почніть вводити назву, артикул або категорію одягу...</div>';
+        return;
+      }
+
+      // Шукаємо по об'єкту PRODUCTS_DATA
+      const matches = Object.entries(PRODUCTS_DATA).filter(([id, item]) => {
+        const titleMatch = item.title.toLowerCase().includes(query);
+        const skuMatch = item.sku.toLowerCase().includes(query);
+        const catMatch = item.category.toLowerCase().includes(query);
+        return titleMatch || skuMatch || catMatch;
+      });
+
+      if (matches.length === 0) {
+        searchResultsContainer.innerHTML = `
+          <div class="search-hint">
+            <span style="font-size: 32px; display: block; margin-bottom: 8px;">🔍</span>
+            За запитом <strong>«${siteSearchInput.value}»</strong> нічого не знайдено.<br>
+            Спробуйте інше слово або категорію.
+          </div>
+        `;
+        return;
+      }
+
+      // Виводимо знайдені товари
+      searchResultsContainer.innerHTML = matches.map(([id, item]) => `
+        <a href="product.html?id=${id}" class="search-item-card">
+          <img src="${item.photo}" alt="${item.title}" class="search-item-thumb">
+          <div class="search-item-info">
+            <div class="search-item-title">${item.title}</div>
+            <div class="search-item-category">${item.category} • Арт: ${item.sku}</div>
+          </div>
+          <div class="search-item-price">${item.currentPrice}</div>
+        </a>
+      `).join('');
+    });
+  }
 
   // Віджет знижки
   const giftWidget = document.getElementById('giftWidget');
@@ -679,11 +879,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeAllModals();
-  });
-
-  // Ініціалізуємо кошик під час завантаження сторінки
+  // Ініціалізація кошика
   renderCart();
 
 });
