@@ -1,4 +1,4 @@
-/* Базові налаштування та плавна прокрутка */
+/* Базові налаштування */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;
@@ -26,17 +26,16 @@ body.pdp-body {
   max-width: 1240px;
   margin: 0 auto;
   padding: 0 20px;
+  width: 100%;
 }
 
-/* ==========================================================
-   ШАПКА САЙТУ
-   ========================================================== */
+/* ШАПКА */
 .header {
   background: #fff;
   border-bottom: 1px solid #eaeaea;
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 500;
 }
 
 body.pdp-body .header {
@@ -71,17 +70,21 @@ body.pdp-body .action-btn {
   letter-spacing: 1.5px;
 }
 
+.logo span {
+  color: #f5b700;
+}
+
 .nav-list {
   display: flex;
   list-style: none;
-  gap: 25px;
+  gap: 22px;
 }
 
 .nav-list a {
   text-decoration: none;
   color: #222;
   font-weight: 500;
-  font-size: 15px;
+  font-size: 14px;
   transition: color 0.2s ease;
 }
 
@@ -93,6 +96,7 @@ body.pdp-body .action-btn {
 .header-actions {
   display: flex;
   gap: 15px;
+  align-items: center;
 }
 
 .action-btn {
@@ -114,7 +118,7 @@ body.pdp-body .action-btn {
   padding: 2px 5px;
 }
 
-/* Бургер-кнопка для мобільних екранів */
+/* Мобільний бургер */
 .mobile-burger-btn {
   display: none;
   background: transparent;
@@ -151,14 +155,12 @@ body.pdp-body .mobile-burger-btn span {
   transform: translateY(-10px) rotate(-45deg);
 }
 
-/* ==========================================================
-   СЛАЙДЕР HERO
-   ========================================================== */
+/* HERO СЛАЙДЕР */
 .hero-slider {
   position: relative;
   width: 100%;
-  height: 80vh;
-  min-height: 520px;
+  height: 75vh;
+  min-height: 500px;
   overflow: hidden;
   background-color: #e0e0e0;
 }
@@ -171,10 +173,7 @@ body.pdp-body .mobile-burger-btn span {
 
 .slide {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.7s ease, visibility 0.7s;
@@ -203,8 +202,8 @@ body.pdp-body .mobile-burger-btn span {
 
 .slide-title {
   font-family: 'Montserrat', sans-serif !important;
-  font-size: clamp(3.2rem, 6.5vw, 5.8rem);
-  font-weight: 700;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 800;
   color: #ffffff;
   letter-spacing: 1.5px;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45);
@@ -217,7 +216,7 @@ body.pdp-body .mobile-burger-btn span {
   width: 46px;
   height: 46px;
   border-radius: 50%;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.65);
   color: #fff;
   border: none;
   cursor: pointer;
@@ -288,11 +287,66 @@ body.pdp-body .mobile-burger-btn span {
   text-transform: uppercase;
 }
 
-/* ==========================================================
-   СЕКЦІЇ ТА СІТКА КАТАЛОГУ
-   ========================================================== */
+/* ПАНЕЛЬ ФІЛЬТРАЦІЇ */
+.filter-container-section {
+  padding-top: 40px;
+}
+
+.catalog-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: #18191c;
+  padding: 18px 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-group label {
+  font-size: 13px;
+  color: #aaa;
+  font-weight: 600;
+}
+
+.filter-select {
+  background: #24252a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #fff;
+  padding: 8px 12px;
+  font-family: inherit;
+  outline: none;
+}
+
+.price-inputs {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #aaa;
+}
+
+.price-inputs input {
+  width: 90px;
+  background: #24252a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #fff;
+  padding: 8px 10px;
+  font-family: inherit;
+  outline: none;
+}
+
+/* СЕКЦІЇ ТА СІТКА КАТАЛОГУ */
 .section {
-  padding: 60px 20px;
+  padding: 50px 20px;
 }
 
 .section-header {
@@ -313,22 +367,23 @@ body.pdp-body .mobile-burger-btn span {
 
 .products-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 25px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
 }
 
 .product-card {
   background: #18191b;
-  border-radius: 6px;
+  border-radius: 12px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-  transition: transform 0.25s;
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
 .product-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .product-card-link {
@@ -341,7 +396,6 @@ body.pdp-body .mobile-burger-btn span {
   width: 100%;
   height: 380px;
   background-color: #2b2b2b;
-  cursor: pointer;
 }
 
 .product-image img {
@@ -355,7 +409,7 @@ body.pdp-body .mobile-burger-btn span {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: rgba(40, 40, 40, 0.7);
+  background: rgba(40, 40, 40, 0.75);
   color: #fff;
   font-size: 12px;
   padding: 4px 8px;
@@ -367,7 +421,7 @@ body.pdp-body .mobile-burger-btn span {
   position: absolute;
   bottom: 12px;
   right: 12px;
-  background: rgba(30, 30, 30, 0.8);
+  background: rgba(30, 30, 30, 0.85);
   color: #fff;
   font-size: 11px;
   padding: 5px 9px;
@@ -377,17 +431,18 @@ body.pdp-body .mobile-burger-btn span {
 .product-info-dark {
   background: #18191b;
   color: #efefef;
-  padding: 14px 16px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  flex-grow: 1;
 }
 
 .product-title-row {
   font-size: 13px;
   color: #d1d5db;
   text-decoration: none;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
   height: 36px;
   overflow: hidden;
@@ -405,6 +460,7 @@ body.pdp-body .mobile-burger-btn span {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: auto;
 }
 
 .price-box {
@@ -432,7 +488,7 @@ body.pdp-body .mobile-burger-btn span {
   padding: 6px 18px;
   border-radius: 20px;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -443,7 +499,7 @@ body.pdp-body .mobile-burger-btn span {
   border-color: #fff;
 }
 
-/* Розділювальні банери */
+/* РОЗДІЛЮВАЛЬНІ БАНЕРИ */
 .divider-banner {
   width: 100%;
   height: 240px;
@@ -460,7 +516,7 @@ body.pdp-body .mobile-burger-btn span {
   filter: brightness(0.9);
 }
 
-/* Перемикачі категорій */
+/* КАТЕГОРІЇ ТА КАРУСЕЛЬ */
 .gender-switch {
   display: flex;
   justify-content: center;
@@ -506,23 +562,18 @@ body.pdp-body .mobile-burger-btn span {
   color: #fff;
 }
 
-/* ==========================================================
-   ПОВНОЕКРАННА КАРУСЕЛЬ КАТАЛОГУ
-   ========================================================== */
 #categories {
   max-width: 100% !important;
   width: 100% !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  overflow: hidden;
 }
 
 #categories .section-header,
 #categories .gender-switch,
 #categories .categories-pills {
   max-width: 1240px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   padding: 0 20px;
 }
 
@@ -530,61 +581,41 @@ body.pdp-body .mobile-burger-btn span {
   position: relative;
   width: 100vw;
   margin: 0 auto;
-  padding: 0;
 }
 
 .carousel-wrapper .products-carousel {
   display: flex !important;
   flex-direction: row !important;
-  flex-wrap: nowrap !important;
   gap: 16px !important;
   overflow-x: auto !important;
   scroll-behavior: smooth;
-  padding: 15px 30px 30px 30px;
+  padding: 15px 30px 30px;
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-  justify-content: flex-start;
-  width: 100% !important;
-  box-sizing: border-box !important;
 }
 
 .carousel-wrapper .products-carousel::-webkit-scrollbar {
   display: none;
 }
 
-/* Динамічне центрування, коли товарів мало */
 .carousel-wrapper .products-carousel.centered {
   justify-content: center !important;
 }
 
-/* Базовий вигляд кожної картки в каруселі */
 .carousel-wrapper .products-carousel .product-card {
-  display: flex !important;
-  flex-direction: column !important;
   flex: 0 0 280px !important;
   width: 280px !important;
-  max-width: 280px !important;
-  min-width: 280px !important;
-  margin: 0;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
 
-.carousel-wrapper .products-carousel .product-card .product-image {
-  height: 380px;
-}
-
-/* КЛАС ПРИХОВУВАННЯ ВІДФІЛЬТРОВАНИХ ТОВАРІВ ІЗ НАЙВИЩИМ ПРІОРИТЕТОМ */
 .carousel-wrapper .products-carousel .product-card.hidden-card {
   display: none !important;
 }
 
-/* Стрілки поверх країв фотографій */
 .carousel-nav-btn {
   position: absolute;
   top: 45%;
   transform: translateY(-50%);
-  width: 52px;
-  height: 52px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
   background: rgba(18, 19, 22, 0.75);
   backdrop-filter: blur(8px);
@@ -596,30 +627,12 @@ body.pdp-body .mobile-burger-btn span {
   align-items: center;
   justify-content: center;
   z-index: 25;
-  transition: all 0.25s ease;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
 }
 
-.carousel-nav-btn:hover {
-  background: rgba(255, 255, 255, 0.95);
-  color: #111;
-  border-color: #fff;
-  transform: translateY(-50%) scale(1.08);
-}
+.carousel-nav-btn.prev { left: 20px; }
+.carousel-nav-btn.next { right: 20px; }
+.carousel-nav-btn.hidden { display: none !important; }
 
-.carousel-nav-btn.prev {
-  left: 20px;
-}
-
-.carousel-nav-btn.next {
-  right: 20px;
-}
-
-.carousel-nav-btn.hidden {
-  display: none !important;
-}
-
-/* Блок сповіщення "Товар у дорозі" */
 .empty-category-msg {
   text-align: center;
   padding: 55px 20px;
@@ -637,58 +650,13 @@ body.pdp-body .mobile-burger-btn span {
   margin-bottom: 14px;
 }
 
-.empty-category-msg h3 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: #fff;
-}
-
-.empty-category-msg p {
-  font-size: 14px;
-  color: #999;
-}
-
-/* ==========================================================
-   КОШИК (ДИНАМІЧНИЙ СПИСОК ТА ПОРОЖНІЙ СТАН)
-   ========================================================== */
-.cart-items-container {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-height: 340px;
-  overflow-y: auto;
-  padding-right: 6px;
-  margin-bottom: 20px;
-}
-
-.cart-items-container::-webkit-scrollbar {
-  width: 5px;
-}
-
-.cart-items-container::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 4px;
-}
-
-.cart-empty-state {
-  text-align: center;
-  padding: 40px 20px;
-  color: #888;
-}
-
-.cart-empty-state p {
-  font-size: 16px;
-  color: #ccc;
-}
-
-/* ==========================================================
-   СТИЛІ СТОРІНКИ ТОВАРУ (PDP)
-   ========================================================== */
+/* ============================================================
+   СТОРІНКА ТОВАРУ (PRODUCT.HTML)
+   ============================================================ */
 .breadcrumbs {
-  font-size: 12px;
+  font-size: 13px;
   color: #777;
-  padding: 16px 20px;
+  padding: 20px 20px 10px;
 }
 
 .breadcrumbs a {
@@ -697,28 +665,24 @@ body.pdp-body .mobile-burger-btn span {
 }
 
 .breadcrumbs a:hover {
-  color: #fff;
+  color: #f5b700;
 }
 
-.pdp-main-layout {
+.product-page-layout {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
-  gap: 45px;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
   padding-bottom: 80px;
-}
-
-.pdp-gallery-section {
-  display: flex;
-  align-items: flex-start;
+  align-items: start;
 }
 
 .pdp-single-photo-wrap {
   width: 100%;
   position: relative;
   background: #222327;
-  border-radius: 6px;
+  border-radius: 16px;
   overflow: hidden;
-  height: 640px;
+  height: 620px;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
 }
 
@@ -726,7 +690,6 @@ body.pdp-body .mobile-burger-btn span {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  display: block;
 }
 
 .pdp-discount-tag {
@@ -738,23 +701,18 @@ body.pdp-body .mobile-burger-btn span {
   color: #fff;
   font-size: 13px;
   font-weight: 700;
-  padding: 5px 10px;
+  padding: 5px 12px;
   border-radius: 14px;
   z-index: 2;
-}
-
-.pdp-details-section {
-  display: flex;
-  flex-direction: column;
 }
 
 .pdp-sku-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 12px;
+  font-size: 13px;
   color: #888;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .pdp-wishlist-circle-btn {
@@ -765,22 +723,22 @@ body.pdp-body .mobile-burger-btn span {
   height: 36px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 16px;
 }
 
 .pdp-title {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 26px;
+  font-weight: 700;
   color: #fff;
-  margin-bottom: 20px;
-  line-height: 1.4;
+  margin-bottom: 16px;
+  line-height: 1.35;
 }
 
 .pdp-pricing-row {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .pdp-prices {
@@ -790,9 +748,9 @@ body.pdp-body .mobile-burger-btn span {
 }
 
 .pdp-current-price {
-  font-size: 26px;
-  font-weight: 700;
-  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  color: #f5b700;
 }
 
 .pdp-old-price {
@@ -802,33 +760,33 @@ body.pdp-body .mobile-burger-btn span {
 }
 
 .pdp-delivery-badge {
-  font-size: 12px;
+  font-size: 13px;
   color: #aaa;
 }
 
 .pdp-delivery-badge strong {
-  color: #fff;
+  color: #4caf50;
 }
 
 .pdp-timer-box {
   background: #232428;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 12px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
 }
 
 .pdp-timer-label {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   color: #fff;
 }
 
 .pdp-timer-counter {
   display: flex;
-  gap: 15px;
+  gap: 16px;
 }
 
 .pdp-timer-counter div {
@@ -837,13 +795,13 @@ body.pdp-body .mobile-burger-btn span {
 
 .pdp-timer-counter span {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   color: #fff;
   display: block;
 }
 
 .pdp-timer-counter small {
-  font-size: 9px;
+  font-size: 10px;
   text-transform: uppercase;
   color: #888;
 }
@@ -871,35 +829,38 @@ body.pdp-body .mobile-burger-btn span {
 }
 
 .pdp-size-btn {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
   background: transparent;
   border: 1px solid #3d4048;
   color: #fff;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
 }
 
 .pdp-size-btn.active, .pdp-size-btn:hover {
-  background: #34373e;
-  border-color: #fff;
+  background: #f5b700;
+  color: #0b0c0e;
+  border-color: #f5b700;
 }
 
 .pdp-size-chart-link {
   background: none;
   border: none;
-  color: #999;
-  font-size: 12px;
+  color: #f5b700;
+  font-size: 13px;
   text-decoration: underline;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .pdp-actions-row {
   display: flex;
   gap: 12px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .pdp-qty-control {
@@ -919,22 +880,28 @@ body.pdp-body .mobile-burger-btn span {
   cursor: pointer;
 }
 
+.pdp-qty-control span {
+  font-weight: 700;
+  color: #fff;
+}
+
 .pdp-main-buy-btn {
   flex: 1;
-  background: #27282c;
-  color: #fff;
-  border: 1px solid #444750;
+  background: #f5b700;
+  color: #0b0c0e;
+  border: none;
   border-radius: 25px;
-  padding: 13px 20px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 14px 22px;
+  font-size: 15px;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
+  box-shadow: 0 4px 15px rgba(245, 183, 0, 0.3);
+  transition: background 0.2s, transform 0.2s;
 }
 
 .pdp-main-buy-btn:hover {
-  background: #34373e;
-  border-color: #fff;
+  background: #ffd000;
+  transform: translateY(-2px);
 }
 
 .pdp-quick-buy-row {
@@ -953,7 +920,7 @@ body.pdp-body .mobile-burger-btn span {
 }
 
 .pdp-phone-prefix {
-  font-size: 13px;
+  font-size: 14px;
   color: #777;
   margin-right: 6px;
 }
@@ -964,7 +931,7 @@ body.pdp-body .mobile-burger-btn span {
   color: #fff;
   width: 100%;
   outline: none;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .pdp-quick-buy-btn {
@@ -977,6 +944,11 @@ body.pdp-body .mobile-burger-btn span {
   cursor: pointer;
 }
 
+.pdp-quick-buy-btn:hover {
+  background: #34373e;
+  color: #fff;
+}
+
 .pdp-other-colors-block {
   border-top: 1px solid #2b2c31;
   padding-top: 18px;
@@ -986,24 +958,19 @@ body.pdp-body .mobile-burger-btn span {
 .pdp-other-colors-title {
   font-size: 12px;
   color: #aaa;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .pdp-color-swatches {
   display: flex;
-  gap: 12px;
-  align-items: center;
+  gap: 10px;
 }
 
 .pdp-color-circle {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  pointer-events: none;
-  cursor: default;
-  user-select: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .pdp-tabs-row {
@@ -1017,259 +984,110 @@ body.pdp-body .mobile-burger-btn span {
   border: none;
   color: #888;
   padding: 10px 16px;
-  font-size: 12px;
+  font-size: 13px;
   cursor: pointer;
 }
 
 .pdp-tab-btn.active {
   color: #fff;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid #f5b700;
 }
 
 .pdp-tab-content {
-  font-size: 12px;
+  font-size: 13px;
   color: #999;
   line-height: 1.8;
 }
 
-/* ==========================================================
-   ПЛАВАЮЧИЙ ПОДАРУНОК
-   ========================================================== */
-.gift-floating-widget {
+/* ============================================================
+   МОДАЛЬНІ ВІКНА: КОШИК, ЧЕКАУТ, ТАБЛИЦЯ РОЗМІРІВ, ІНФО
+   ============================================================ */
+.modal-overlay,
+.cart-modal-overlay,
+.size-modal-overlay {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
-  z-index: 9990;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-}
-
-.gift-icon-bubble {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #e53935, #b71c1c);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(229, 57, 53, 0.45);
-  position: relative;
-  transition: transform 0.3s;
-}
-
-.gift-icon-bubble:hover {
-  transform: scale(1.12) rotate(-8deg);
-}
-
-.gift-emoji {
-  font-size: 28px;
-  line-height: 1;
-}
-
-.gift-ping {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 2px solid #e53935;
-  animation: giftPingAnim 2.2s infinite;
-  pointer-events: none;
-}
-
-@keyframes giftPingAnim {
-  0% { transform: scale(1); opacity: 0.8; }
-  100% { transform: scale(1.55); opacity: 0; }
-}
-
-.gift-popup-card {
-  position: absolute;
-  bottom: 74px;
-  right: 0;
-  width: 270px;
-  background: #18191c;
-  color: #fff;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.6);
-  border: 1px solid #2f3238;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(14px) scale(0.96);
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
-  pointer-events: none;
-}
-
-.gift-floating-widget:hover .gift-popup-card,
-.gift-floating-widget.active .gift-popup-card {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-
-.gift-popup-badge {
-  display: inline-block;
-  background: #e53935;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 6px;
-  margin-bottom: 8px;
-}
-
-.gift-popup-text {
-  font-size: 12px;
-  color: #ccc;
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-
-.gift-code-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #25272c;
-  border: 1px dashed #555;
-  border-radius: 8px;
-  padding: 6px 10px;
-  margin-bottom: 10px;
-}
-
-.gift-code {
-  font-weight: 700;
-  font-size: 15px;
-  color: #fff;
-  letter-spacing: 1.5px;
-}
-
-.gift-copy-btn {
-  background: #fff;
-  color: #111;
-  border: none;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 5px 10px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.gift-popup-hint {
-  font-size: 10px;
-  color: #888;
-  display: block;
-}
-
-/* ==========================================================
-   МОДАЛЬНІ ВІКНА
-   ========================================================== */
-.size-modal-overlay, .cart-modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.78);
-  backdrop-filter: blur(6px);
-  z-index: 10001;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.size-modal-overlay.open, .cart-modal-overlay.open {
+  background: rgba(8, 9, 11, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 10000;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
 }
 
-.size-modal-box {
-  background: #151618;
-  color: #fff;
-  width: 100%;
-  max-width: 380px;
-  padding: 35px 28px 30px;
-  border-radius: 24px;
-  position: relative;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-  text-align: center;
+.modal-overlay.open,
+.cart-modal-overlay.open,
+.size-modal-overlay.open {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
-.size-modal-close, .cart-modal-close {
+.modal-close-btn, .cart-modal-close, .size-modal-close {
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 18px;
+  right: 20px;
   background: transparent;
   border: none;
-  color: #777;
-  font-size: 22px;
+  font-size: 26px;
+  color: #888;
   cursor: pointer;
   line-height: 1;
 }
 
-.size-modal-title {
-  font-size: 17px;
-  font-weight: 500;
-  color: #efefef;
-  margin-bottom: 24px;
-}
-
-.size-options-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.size-pill-option {
-  width: 100%;
-  padding: 13px 0;
-  background: transparent;
+.modal-close-btn:hover, .cart-modal-close:hover, .size-modal-close:hover {
   color: #fff;
-  border: 1px solid #2d3036;
-  border-radius: 25px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
 }
 
-.size-pill-option:hover {
-  background: #1e2024;
-  border-color: #888;
-}
-
+/* Кошик */
 .cart-modal-box {
   background: #18191c;
   color: #fff;
   width: 100%;
   max-width: 620px;
-  border-radius: 18px;
-  padding: 32px 36px 30px;
+  border-radius: 20px;
+  padding: 32px;
   position: relative;
-  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.85);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .cart-modal-title {
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 700;
-  margin-bottom: 26px;
+  margin-bottom: 20px;
+}
+
+.cart-items-container {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-height: 340px;
+  overflow-y: auto;
+  margin-bottom: 20px;
 }
 
 .cart-item-row {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 16px;
-  padding-bottom: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 12px;
   position: relative;
-  border-bottom: 1px solid #28292d;
 }
 
 .cart-item-thumb {
-  width: 75px;
-  height: 90px;
-  border-radius: 4px;
+  width: 60px;
+  height: 75px;
+  border-radius: 8px;
   overflow: hidden;
-  background: #25262a;
   flex-shrink: 0;
 }
 
@@ -1281,78 +1099,58 @@ body.pdp-body .mobile-burger-btn span {
 
 .cart-item-details {
   flex: 1;
-  padding-right: 35px;
 }
 
 .cart-item-name {
   font-size: 14px;
-  font-weight: 500;
-  line-height: 1.4;
-  color: #efefef;
-  margin-bottom: 6px;
+  color: #fff;
+  margin-bottom: 4px;
 }
 
 .cart-item-meta {
   font-size: 13px;
-  color: #999;
-  margin-bottom: 4px;
-}
-
-.cart-item-price {
-  font-size: 15px;
-  font-weight: 700;
-  color: #fff;
+  color: #aaa;
 }
 
 .cart-item-remove {
-  position: absolute;
-  top: 10px;
-  right: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 1px solid #3c3e44;
   background: transparent;
-  color: #888;
+  border: none;
+  color: #ef4444;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+  font-size: 16px;
+  padding: 6px;
 }
 
-.cart-item-remove:hover {
-  background: #e53935;
-  color: #fff;
-  border-color: #e53935;
+.cart-empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
 }
 
 .cart-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 16px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 20px;
-  padding-top: 15px;
 }
 
 .btn-continue-shopping {
   background: transparent;
   color: #fff;
-  border: 1px solid #3a3d44;
-  padding: 12px 24px;
-  border-radius: 25px;
+  border: 1px solid #444;
+  padding: 10px 20px;
+  border-radius: 20px;
   font-size: 13px;
   cursor: pointer;
 }
 
 .cart-summary-card {
   background: #242528;
-  border-radius: 14px;
-  padding: 16px 20px;
-  width: 190px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  border-radius: 12px;
+  padding: 16px;
+  width: 220px;
+  text-align: right;
 }
 
 .summary-line {
@@ -1360,31 +1158,204 @@ body.pdp-body .mobile-burger-btn span {
   justify-content: space-between;
   font-size: 13px;
   color: #ccc;
+  margin-bottom: 6px;
 }
 
-.summary-line strong {
-  color: #fff;
+.total-line strong {
+  color: #f5b700;
+  font-size: 18px;
 }
 
 .btn-checkout {
   width: 100%;
-  padding: 10px 0;
-  background: #676155;
-  color: #fff;
+  padding: 12px 0;
+  background: #f5b700;
+  color: #0b0c0e;
   border: none;
   border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   cursor: pointer;
+  margin-top: 10px;
 }
 
-/* ==========================================================
-   ФУТЕР
-   ========================================================== */
+.btn-checkout:hover {
+  background: #ffd000;
+}
+
+/* Оформлення замовлення (Checkout) */
+.checkout-modal-card {
+  background: #15181e;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 820px;
+  padding: 40px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.checkout-header {
+  margin-bottom: 24px;
+}
+
+.checkout-header h2 {
+  font-size: 26px;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.checkout-header p {
+  color: #aaa;
+  font-size: 14px;
+}
+
+.checkout-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 32px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  color: #aaa;
+  margin-bottom: 6px;
+}
+
+.form-group input, 
+.form-group select {
+  width: 100%;
+  background: #1c1f26;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  padding: 12px 14px;
+  color: #fff;
+  font-family: inherit;
+  outline: none;
+}
+
+.form-group input:focus, 
+.form-group select:focus {
+  border-color: #f5b700;
+}
+
+.checkout-summary-box {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.payment-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 18px 0;
+}
+
+.payment-radio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 12px;
+  border-radius: 10px;
+}
+
+.payment-radio input:checked + span {
+  color: #f5b700;
+  font-weight: 700;
+}
+
+.checkout-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 16px 0;
+}
+
+.checkout-total-row strong {
+  color: #f5b700;
+  font-size: 22px;
+}
+
+/* Таблиця розмірів (модалка для img/razmer.png) */
+.size-modal-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 650px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+}
+
+.size-modal-title {
+  color: #111;
+  margin-bottom: 14px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.size-img-container {
+  width: 100%;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.size-guide-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Модалка доставки */
+.info-modal-card {
+  background: #18191c;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  max-width: 560px;
+  width: 100%;
+  padding: 36px;
+  position: relative;
+  color: #fff;
+}
+
+.info-block {
+  margin-top: 18px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.info-block h4 {
+  color: #f5b700;
+  margin-bottom: 8px;
+}
+
+.info-block ul {
+  padding-left: 20px;
+  line-height: 1.7;
+}
+
+/* ПІДВАЛ САЙТУ */
 .footer {
   background: #111;
   color: #ccc;
   padding: 50px 0 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .footer-container {
@@ -1396,6 +1367,11 @@ body.pdp-body .mobile-burger-btn span {
 .footer h3, .footer h4 {
   color: #fff;
   margin-bottom: 15px;
+}
+
+.footer-copy {
+  color: #666;
+  font-size: 12px;
 }
 
 .footer ul {
@@ -1411,43 +1387,78 @@ body.pdp-body .mobile-burger-btn span {
   text-decoration: none;
 }
 
-/* ==========================================================
-   АДАПТИВНІСТЬ ДЛЯ СМАРТФОНІВ ТА ПЛАНШЕТІВ
-   ========================================================== */
+.footer a:hover {
+  color: #f5b700;
+}
+
+/* КНОПКИ */
+.btn {
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.btn-primary {
+  background: #f5b700;
+  color: #0b0c0e;
+}
+
+.btn-primary:hover {
+  background: #ffd000;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-block {
+  width: 100% !important;
+}
+
+/* АДАПТИВНІСТЬ */
+@media (max-width: 900px) {
+  .product-page-layout {
+    grid-template-columns: 1fr;
+  }
+  .pdp-single-photo-wrap {
+    height: 440px;
+  }
+  .checkout-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-  html {
-    scroll-padding-top: 65px;
-  }
-
-  .header-container {
-    height: 60px;
-    padding: 0 16px;
-  }
-
-  .logo {
-    font-size: 20px;
-    letter-spacing: 1.2px;
-  }
-
   .mobile-burger-btn {
     display: flex;
   }
 
   .nav {
     position: fixed;
-    top: 60px;
+    top: 70px;
     left: -100%;
     width: 100%;
-    height: calc(100vh - 60px);
-    background: #ffffff;
+    height: calc(100vh - 70px);
+    background: #111214;
     transition: left 0.35s ease;
     padding: 30px 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     z-index: 99;
-  }
-
-  body.pdp-body .nav {
-    background: #151618;
   }
 
   .nav.open {
@@ -1456,213 +1467,312 @@ body.pdp-body .mobile-burger-btn span {
 
   .nav-list {
     flex-direction: column;
-    gap: 22px;
-    align-items: flex-start;
+    gap: 20px;
   }
 
-  .nav-list a {
-    font-size: 18px;
-    font-weight: 600;
-  }
-
-  .hero-slider {
-    height: 55vh;
-    min-height: 420px;
-  }
-
-  .slide-content {
-    right: 8%;
-    top: 40%;
-  }
-
-  .slide-title {
-    font-size: 2.6rem !important;
-  }
-
-  .slider-btn {
-    width: 38px;
-    height: 38px;
-    font-size: 16px;
-  }
-
-  .prev-btn { left: 12px; }
-  .next-btn { right: 12px; }
-
-  .hero-promo-bar {
-    width: 94%;
-    bottom: 16px;
-    padding: 14px 16px;
-    border-radius: 18px;
+  .catalog-filter-bar {
     flex-direction: column;
-    gap: 12px;
-  }
-
-  .promo-text {
-    font-size: 13px;
-  }
-
-  .promo-timer {
-    gap: 12px;
-  }
-
-  .timer-segment span {
-    font-size: 16px;
-  }
-
-  .promo-btn {
-    width: 100%;
-    text-align: center;
-    padding: 8px 0;
-  }
-
-  .products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .product-image {
-    height: 220px;
-  }
-
-  .product-info-dark {
-    padding: 10px 12px;
-    gap: 8px;
-  }
-
-  .product-title-row {
-    font-size: 11px;
-    height: 32px;
-    line-height: 1.3;
-  }
-
-  .price-current {
-    font-size: 14px;
-  }
-
-  .price-old {
-    font-size: 11px;
-  }
-
-  .buy-pill-btn {
-    padding: 5px 12px;
-    font-size: 11px;
-  }
-
-  .divider-banner {
-    height: 140px;
-  }
-
-  .carousel-wrapper .products-carousel {
-    padding: 10px 16px 20px 16px !important;
-    gap: 12px !important;
-  }
-
-  .carousel-wrapper .products-carousel .product-card {
-    flex: 0 0 210px !important;
-    width: 210px !important;
-    max-width: 210px !important;
-    min-width: 210px !important;
-  }
-
-  .carousel-wrapper .products-carousel .product-card .product-image {
-    height: 300px;
-  }
-
-  .carousel-nav-btn {
-    display: none !important;
-  }
-
-  .pdp-main-layout {
-    grid-template-columns: 1fr;
-    gap: 25px;
-    padding-bottom: 50px;
-  }
-
-  .pdp-single-photo-wrap {
-    height: 420px;
-  }
-
-  .pdp-title {
-    font-size: 18px;
-    margin-bottom: 14px;
-  }
-
-  .pdp-current-price {
-    font-size: 22px;
-  }
-
-  .pdp-timer-box {
-    padding: 10px 14px;
-  }
-
-  .pdp-actions-row {
-    flex-direction: row;
-  }
-
-  .pdp-quick-buy-row {
-    flex-direction: column;
-  }
-
-  .pdp-quick-buy-btn {
-    width: 100%;
-  }
-
-  .cart-modal-box {
-    padding: 24px 20px 20px;
-    border-radius: 16px;
-    max-width: 95%;
-  }
-
-  .cart-modal-title {
-    font-size: 20px;
-    margin-bottom: 18px;
-  }
-
-  .cart-item-thumb {
-    width: 65px;
-    height: 80px;
-  }
-
-  .cart-item-name {
-    font-size: 13px;
+    align-items: stretch;
   }
 
   .cart-modal-footer {
     flex-direction: column-reverse;
     align-items: stretch;
-    gap: 14px;
   }
 
   .cart-summary-card {
     width: 100%;
   }
-
-  .gift-floating-widget {
-    bottom: 18px;
-    right: 18px;
-  }
-
-  .gift-icon-bubble {
-    width: 50px;
-    height: 50px;
-  }
-
-  .gift-emoji {
-    font-size: 24px;
-  }
-
-  .gift-popup-card {
-    width: 250px;
-    bottom: 64px;
-    right: 0;
-  }
+}
+/* ==========================================================
+   ПЛАВАЮЧИЙ ВІДЖЕТ ПОДАРУНКА З ПРОМОКОДОМ
+   ========================================================== */
+.gift-floating-widget {
+  position: fixed !important;
+  bottom: 28px !important;
+  right: 28px !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
 }
 
-@media (max-width: 380px) {
-  .products-grid {
-    grid-template-columns: 1fr;
-  }
-  .product-image {
-    height: 320px;
-  }
+/* Кругла червона кнопка з іконкою подарунка */
+.gift-icon-bubble {
+  width: 62px !important;
+  height: 62px !important;
+  border-radius: 50% !important;
+  background: radial-gradient(circle at 35% 35%, #d32f2f, #8b0000) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  box-shadow: 0 8px 24px rgba(211, 47, 47, 0.55), 0 0 20px rgba(211, 47, 47, 0.35) !important;
+  position: relative !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+  user-select: none !important;
+}
+
+.gift-icon-bubble:hover {
+  transform: scale(1.1) rotate(-6deg) !important;
+  box-shadow: 0 12px 30px rgba(211, 47, 47, 0.75) !important;
+}
+
+.gift-emoji {
+  font-size: 30px !important;
+  line-height: 1 !important;
+  display: block !important;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4)) !important;
+}
+
+/* Пульсуюче коло навколо кнопки */
+.gift-ping {
+  position: absolute !important;
+  inset: 0 !important;
+  border-radius: 50% !important;
+  border: 2px solid #e53935 !important;
+  animation: giftPingPulse 2s infinite ease-out !important;
+  pointer-events: none !important;
+}
+
+@keyframes giftPingPulse {
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Спливаюча картка промокоду */
+.gift-popup-card {
+  position: absolute !important;
+  bottom: 76px !important;
+  right: 0 !important;
+  width: 290px !important;
+  background: #141518 !important;
+  color: #ffffff !important;
+  padding: 22px 20px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.85), 0 0 1px rgba(255, 255, 255, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transform: translateY(12px) scale(0.96) !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s !important;
+  pointer-events: none !important;
+  text-align: left !important;
+}
+
+/* Показ при наведенні або кліку */
+.gift-floating-widget:hover .gift-popup-card,
+.gift-floating-widget.active .gift-popup-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: translateY(0) scale(1) !important;
+  pointer-events: auto !important;
+}
+
+.gift-popup-badge {
+  display: inline-block !important;
+  background: #b71c1c !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.6px !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  margin-bottom: 12px !important;
+  text-transform: uppercase !important;
+}
+
+.gift-popup-text {
+  font-size: 13px !important;
+  color: #cfd2da !important;
+  line-height: 1.45 !important;
+  margin-bottom: 14px !important;
+}
+
+.gift-code-box {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  background: #1d1f24 !important;
+  border: 1px dashed rgba(255, 255, 255, 0.25) !important;
+  border-radius: 10px !important;
+  padding: 8px 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.gift-code {
+  font-weight: 800 !important;
+  font-size: 17px !important;
+  color: #ffffff !important;
+  letter-spacing: 1.8px !important;
+  font-family: inherit !important;
+}
+
+.gift-copy-btn {
+  background: #252830 !important;
+  color: #f1f3f7 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  padding: 6px 12px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  font-family: inherit !important;
+}
+
+.gift-copy-btn:hover {
+  background: #ffffff !important;
+  color: #0b0c0e !important;
+  border-color: #ffffff !important;
+}
+
+.gift-popup-hint {
+  font-size: 11px !important;
+  color: #7b808c !important;
+  display: block !important;
+}
+/* ==========================================================
+   МОДАЛЬНЕ ВІКНО ПОШУКУ
+   ========================================================== */
+.search-modal-card {
+  background: #15181e;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 680px;
+  padding: 36px 30px 30px;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #1d2129;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 4px 16px;
+  margin-top: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-input-wrapper:focus-within {
+  border-color: #f5b700;
+  box-shadow: 0 0 0 3px rgba(245, 183, 0, 0.15);
+}
+
+.search-input-icon {
+  font-size: 18px;
+  margin-right: 12px;
+  color: #7b808c;
+}
+
+.search-input-wrapper input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 14px 0;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.search-input-wrapper input::placeholder {
+  color: #5d6270;
+}
+
+.search-clear-btn {
+  background: transparent;
+  border: none;
+  color: #7b808c;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.search-clear-btn:hover {
+  color: #ffffff;
+}
+
+.search-results-container {
+  margin-top: 22px;
+  overflow-y: auto;
+  max-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-right: 6px;
+}
+
+.search-results-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.search-results-container::-webkit-scrollbar-thumb {
+  background: #2b2e36;
+  border-radius: 4px;
+}
+
+.search-hint {
+  text-align: center;
+  color: #6c7280;
+  font-size: 14px;
+  padding: 30px 10px;
+}
+
+.search-item-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 10px 14px;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.search-item-card:hover {
+  background: rgba(245, 183, 0, 0.08);
+  border-color: rgba(245, 183, 0, 0.3);
+  transform: translateX(4px);
+}
+
+.search-item-thumb {
+  width: 54px;
+  height: 68px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #20232a;
+  flex-shrink: 0;
+}
+
+.search-item-info {
+  flex: 1;
+}
+
+.search-item-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+.search-item-category {
+  font-size: 12px;
+  color: #8a909d;
+}
+
+.search-item-price {
+  font-size: 15px;
+  font-weight: 800;
+  color: #f5b700;
+  white-space: nowrap;
 }
