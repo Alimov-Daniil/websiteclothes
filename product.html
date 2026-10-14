@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Деталі товару | CLOTHES.UA</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=8.0">
 </head>
 <body class="pdp-body">
 
- <!-- Шапка сайту для product.html -->
+  <!-- Шапка сайту для product.html -->
   <header class="header">
     <div class="container header-container">
       <button class="mobile-burger-btn" id="mobileMenuToggle" aria-label="Відкрити меню">
@@ -26,6 +26,8 @@
           <li><a href="index.html?gender=men#categories">Чоловікам</a></li>
           <li><a href="index.html#hits">Хіти</a></li>
           <li><a href="index.html#sales" class="sale-link">Розпродаж</a></li>
+          <li><a href="#delivery" class="footer-delivery-link">Доставка та оплата</a></li>
+          <li><a href="#" class="size-guide-btn">Таблиця розмірів</a></li>
         </ul>
       </nav>
 
@@ -37,6 +39,7 @@
       </div>
     </div>
   </header>
+
   <!-- Хлібні крихти -->
   <nav class="breadcrumbs container">
     <a href="index.html">Інтернет-магазин одягу</a> / 
@@ -45,10 +48,10 @@
     <span id="breadcrumbCurrent">Товар</span>
   </nav>
 
-  <!-- Головний блок PDP -->
-  <main class="container pdp-main-layout">
+  <!-- Головний блок товару -->
+  <main class="container product-page-layout">
     
-    <!-- Ліва частина: 1 якісне головне фото товару -->
+    <!-- Ліва частина: Фотографія товару -->
     <div class="pdp-gallery-section">
       <div class="pdp-single-photo-wrap">
         <span class="pdp-discount-tag" id="pdpDiscountBadge">-50%</span>
@@ -56,7 +59,7 @@
       </div>
     </div>
 
-    <!-- Права частина: Інформація та вибір параметрів -->
+    <!-- Права частина: Інформація та вибір розміру -->
     <div class="pdp-details-section">
       <div class="pdp-sku-row">
         <span>Модель: <strong id="pdpSku">241R770</strong></span>
@@ -65,7 +68,7 @@
 
       <h1 class="pdp-title" id="pdpTitle">Назва товару</h1>
 
-      <!-- Рядок цін та відправки -->
+      <!-- Ціни та статус відправки -->
       <div class="pdp-pricing-row">
         <div class="pdp-prices">
           <span class="pdp-current-price" id="pdpPriceCurrent">0 грн</span>
@@ -85,72 +88,92 @@
         </div>
       </div>
 
-      <!-- Вибір розміру -->
+      <!-- Вибір розміру + кнопка виклику таблиці розмірів -->
       <div class="pdp-size-section">
         <div class="pdp-size-header">
           <span>Виберіть розмір:</span>
           <span class="pdp-stock-status">В наявності: <strong id="pdpStockCount">8 шт</strong></span>
         </div>
         <div class="pdp-sizes-pills" id="pdpSizesPills">
-          <button class="pdp-size-btn active">S</button>
-          <button class="pdp-size-btn">M</button>
-          <button class="pdp-size-btn">L</button>
-          <button class="pdp-size-btn">XL</button>
+          <button type="button" class="pdp-size-btn active">S</button>
+          <button type="button" class="pdp-size-btn">M</button>
+          <button type="button" class="pdp-size-btn">L</button>
+          <button type="button" class="pdp-size-btn">XL</button>
         </div>
-        <button class="pdp-size-chart-link">Розмірна сітка</button>
+        <button type="button" class="pdp-size-chart-link size-guide-btn">📏 Таблиця розмірів</button>
       </div>
 
-      <!-- Кількість та кнопки покупки -->
+      <!-- Кількість та купівля -->
       <div class="pdp-actions-row">
         <div class="pdp-qty-control">
-          <button id="pdpQtyMinus">-</button>
+          <button type="button" id="pdpQtyMinus">-</button>
           <span id="pdpQtyValue">1</span>
-          <button id="pdpQtyPlus">+</button>
+          <button type="button" id="pdpQtyPlus">+</button>
         </div>
-        <button class="pdp-main-buy-btn" id="pdpMainBuyBtn">🛍️ Купити</button>
+        <button type="button" class="pdp-main-buy-btn" id="pdpMainBuyBtn">🛍️ Купити</button>
       </div>
 
+      <!-- Швидка покупка в 1 клік -->
       <div class="pdp-quick-buy-row">
         <div class="pdp-phone-input-wrap">
           <span class="pdp-phone-prefix">+380</span>
-          <input type="tel" placeholder="Введіть номер..." maxlength="9">
+          <input type="tel" id="quickBuyPhone" placeholder="Введіть номер..." maxlength="9">
         </div>
-        <button class="pdp-quick-buy-btn" id="pdpQuickBuyBtn">Купити в 1 клік</button>
+        <button type="button" class="pdp-quick-buy-btn" id="pdpQuickBuyBtn">Купити в 1 клік</button>
       </div>
 
-      <!-- Блок «Цей товар в інших кольорах» (кружечки без кліку) -->
+      <!-- Інші кольори -->
       <div class="pdp-other-colors-block">
         <div class="pdp-other-colors-title">Цей товар в інших кольорах:</div>
-        <div class="pdp-color-swatches" id="pdpColorSwatches">
-          <!-- Генеруються через JS -->
-        </div>
+        <div class="pdp-color-swatches" id="pdpColorSwatches"></div>
       </div>
 
-      <!-- Нижні таби -->
+      <!-- Опис та характеристики -->
       <div class="pdp-tabs-row">
-        <button class="pdp-tab-btn active">Характеристики</button>
-        <button class="pdp-tab-btn">Залишити відгук</button>
-        <button class="pdp-tab-btn">Заміри виробу</button>
+        <button type="button" class="pdp-tab-btn active">Характеристики</button>
       </div>
       <div class="pdp-tab-content">
         <p>• Матеріал: натуральна бавовна 85%, поліестер 15% (тринитка петля преміум якості).</p>
-        <p>• Особливості: оверсайз посадка, міцна фурнітура, стильна вишивка на худі та брюках.</p>
+        <p>• Особливості: оверсайз посадка, міцна фурнітура, стильні плоскі шви.</p>
         <p>• Виробник: Україна.</p>
       </div>
 
     </div>
   </main>
 
-  <!-- Модальне вікно кошика для product.html -->
+  <!-- Підвал -->
+  <footer class="footer">
+    <div class="container footer-container">
+      <div>
+        <h3>CLOTHES.UA</h3>
+        <p>Магазин стильного та якісного одягу для кожного дня.</p>
+        <span class="footer-copy">© 2026 CLOTHES.UA. Всі права захищені.</span>
+      </div>
+      <div>
+        <h4>Клієнтам</h4>
+        <ul>
+          <li><a href="#delivery" class="footer-delivery-link">Доставка та оплата</a></li>
+          <li><a href="#" class="size-guide-btn">Таблиця розмірів</a></li>
+          <li><a href="index.html#categories">Каталог одягу</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Контакти</h4>
+        <p>Телефон: +38 (080) 000-00-00</p>
+        <p>Пн-Нд: 09:00 - 20:00</p>
+        <p>м. Київ, вул. Хрещатик, 24</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Модальне вікно кошика -->
   <div class="cart-modal-overlay" id="cartModal">
     <div class="cart-modal-box">
       <button class="cart-modal-close" id="closeCartModal" aria-label="Закрити">&times;</button>
       <h2 class="cart-modal-title">Кошик замовлень</h2>
       
-      <!-- Контейнер для доданих товарів -->
       <div class="cart-items-container" id="cartItemsContainer"></div>
 
-      <!-- Блок, якщо кошик порожній -->
       <div class="cart-empty-state" id="cartEmptyState" style="display: none;">
         <span style="font-size: 40px; display: block; margin-bottom: 10px;">🛒</span>
         <p>Ваш кошик порожній</p>
@@ -169,6 +192,105 @@
           </div>
           <button class="btn-checkout">Оформлення покупки</button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальне вікно: Оформлення замовлення та оплата (Checkout) -->
+  <div class="modal-overlay" id="checkoutModal">
+    <div class="checkout-modal-card">
+      <button class="modal-close-btn" id="closeCheckoutModal" aria-label="Закрити">&times;</button>
+      <div class="checkout-header">
+        <h2>Оформлення замовлення</h2>
+        <p>Заповніть контактні дані для доставки та виберіть спосіб оплати</p>
+      </div>
+
+      <form id="checkoutForm" class="checkout-form">
+        <div class="checkout-layout">
+          <div class="checkout-fields">
+            <div class="form-group">
+              <label for="orderName">Прізвище та ім'я</label>
+              <input type="text" id="orderName" placeholder="Олександр Коваленко" required>
+            </div>
+            <div class="form-group">
+              <label for="orderPhone">Номер телефону</label>
+              <input type="tel" id="orderPhone" placeholder="+380 (99) 000-00-00" required>
+            </div>
+            <div class="form-group">
+              <label for="orderCity">Місто доставки</label>
+              <input type="text" id="orderCity" placeholder="Київ, Дніпро, Львів..." required>
+            </div>
+            <div class="form-group">
+              <label for="orderDelivery">Спосіб доставки</label>
+              <select id="orderDelivery" required>
+                <option value="np">Нова Пошта (відділення або поштомат)</option>
+                <option value="courier">Кур'єр Нова Пошта</option>
+                <option value="ukrposhta">Укрпошта</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="orderAddress">Номер відділення або адреса</label>
+              <input type="text" id="orderAddress" placeholder="Відділення №15 або вул. Соборна 25" required>
+            </div>
+          </div>
+
+          <div class="checkout-summary-box">
+            <h3>Спосіб оплати</h3>
+            <div class="payment-options">
+              <label class="payment-radio">
+                <input type="radio" name="paymentMethod" value="card" checked>
+                <span>💳 Оплата карткою онлайн (Apple Pay / Google Pay)</span>
+              </label>
+              <label class="payment-radio">
+                <input type="radio" name="paymentMethod" value="cod">
+                <span>📦 Післяплата (при отриманні у відділенні)</span>
+              </label>
+            </div>
+
+            <div class="checkout-total-row">
+              <span>До сплати:</span>
+              <strong id="checkoutFinalTotal">0 грн</strong>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">Підтвердити та оплатити</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Модальне вікно: Таблиця розмірів (шлях img/razmer.png) -->
+  <div class="modal-overlay" id="sizeGuideModal">
+    <div class="size-modal-card">
+      <button class="modal-close-btn" id="closeSizeGuideModal" aria-label="Закрити">&times;</button>
+      <h3 class="size-modal-title">Таблиця визначення розмірів</h3>
+      <div class="size-img-container">
+        <img src="img/razmer.png" alt="Таблиця розмірів" class="size-guide-img" onerror="this.src='img/razmer.jpg'">
+      </div>
+    </div>
+  </div>
+
+  <!-- Модальне вікно: Доставка та оплата -->
+  <div class="modal-overlay" id="infoDeliveryModal">
+    <div class="info-modal-card">
+      <button class="modal-close-btn" id="closeDeliveryModal" aria-label="Закрити">&times;</button>
+      <h2>Доставка та Оплата</h2>
+      
+      <div class="info-block">
+        <h4>🚚 Способи доставки:</h4>
+        <ul>
+          <li><strong>Нова Пошта</strong> — доставка у відділення та поштомати по Україні (1–3 дні).</li>
+          <li><strong>Кур'єр Нова Пошта</strong> — доставка до дверей.</li>
+          <li><strong>Укрпошта</strong> — по всій території України (3–5 днів).</li>
+        </ul>
+      </div>
+
+      <div class="info-block">
+        <h4>💳 Способи оплати:</h4>
+        <ul>
+          <li><strong>Онлайн-оплата</strong> картками Visa / MasterCard, Apple Pay, Google Pay без комісій.</li>
+          <li><strong>Накладений платіж</strong> з оплатою після огляду у відділенні.</li>
+        </ul>
       </div>
     </div>
   </div>
